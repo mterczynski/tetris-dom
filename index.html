@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Tetris</title>
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        >
+        <meta
+            http-equiv="X-UA-Compatible"
+            content="ie=edge"
+        >
+        <title>Tetris</title>
+        <style>
       * {
         color: white;
         font-family: Calibri;
@@ -42,21 +48,22 @@
         border-top: 1px solid black;
       }
     </style>
-  </head>
-  <body>
-    <div id="game-container">
-      <div id="board"></div>
-      <div class="score-row">
-        <div>
-          <span>Score:</span>
-          <span id="score">0</span>
+        <link rel="stylesheet" href="figures.css">
+    </head>
+    <body>
+        <div id="game-container">
+            <div id="board"></div>
+            <div class="score-row">
+                <div>
+                    <span>Score:</span>
+                    <span id="score">0</span>
+                </div>
+                <div>
+                    <span>Best score:</span>
+                    <span id="best-score">0</span>
+                </div>
+            </div>
         </div>
-        <div>
-          <span>Best score:</span>
-          <span id="best-score">0</span>
-        </div>
-      </div>
-    </div>
-    <script src="main.js"></script>
-  </body>
+        <script src="main.js"></script>
+    </body>
 </html>
