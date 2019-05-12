@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tetris</title>
+    <style>
+      * {
+        color: white;
+        font-family: Calibri;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        background: black;
+      }
+
+      #game-container {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      #board {
+        background: white;
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+        margin-bottom: 10px;
+      }
+
+      .row {
+        display: flex;
+      }
+
+      .tile {
+        height: 30px;
+        width: 30px;
+        border-left: 1px solid black;
+        border-top: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game-container">
+      <div id="board"></div>
+      <div class="score-row">
+        <div>
+          <span>Score:</span>
+          <span id="score">0</span>
+        </div>
+        <div>
+          <span>Best score:</span>
+          <span id="best-score">0</span>
+        </div>
+      </div>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
