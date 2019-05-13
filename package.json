@@ -1,0 +1,26 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mterczynski/tetris-dom.git"
+  },
+  "keywords": [
+    "tetris"
+  ],
+  "author": "mterczynski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mterczynski/tetris-dom/issues"
+  },
+  "homepage": "https://github.com/mterczynski/tetris-dom#readme",
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest": "^24.8.0"
+  }
+}
