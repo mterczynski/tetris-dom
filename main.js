@@ -3,7 +3,6 @@
 import { figures } from './figures.js'
 import { Renderer } from './renderer.js'
 
-const boardHtmlElement = document.getElementById("board");
 const scoreHtmlElement = document.getElementById("score");
 const bestScoreHtmlElement = document.getElementById("best-score");
 
@@ -21,7 +20,7 @@ function getNewBoardRows() {
 }
 
 function restartGame() {
-  resetBoard();
+  renderer.recreateBoard({ width: boardWidth, height: boardHeight });
   resetScores();
   currentFigure = getRandomFigure();
 }
@@ -87,21 +86,7 @@ function slamCurrentFigure() {
   // todo
 }
 
-function resetBoard() {
-  boardRows = getNewBoardRows();
-  boardHtmlElement.innerHTML = "";
 
-  for (let i = 0; i < boardHeight; i++) {
-    const row = document.createElement("div");
-    row.classList.add("row");
-    boardHtmlElement.appendChild(row);
-    for (let j = 0; j < boardWidth; j++) {
-      const tile = document.createElement("div");
-      tile.classList.add("tile");
-      row.appendChild(tile);
-    }
-  }
-}
 
 function tick() {
   if (!translateCurrentShapeIfPossible({ x: 0, y: 1 })) {

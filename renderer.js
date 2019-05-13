@@ -1,4 +1,6 @@
 export function Renderer() {
+  const boardHtmlElement = document.getElementById("board");
+
   function getHtmlTile(position) {
     return document.querySelector(`.row:nth-child(${position.y + 1}) .tile:nth-child(${position.x + 1})`);
   }
@@ -30,5 +32,20 @@ export function Renderer() {
     clearBoard();
     drawBlocks(boardRows);
     drawCurrentFigure(currentFigure);
+  }
+
+  this.recreateBoard = ({ width, height }) => {
+    boardHtmlElement.innerHTML = "";
+
+    for (let i = 0; i < height; i++) {
+      const row = document.createElement("div");
+      row.classList.add("row");
+      boardHtmlElement.appendChild(row);
+      for (let j = 0; j < width; j++) {
+        const tile = document.createElement("div");
+        tile.classList.add("tile");
+        row.appendChild(tile);
+      }
+    }
   }
 }
