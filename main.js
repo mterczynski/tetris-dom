@@ -1,6 +1,7 @@
 'use strict'
 
 import { figures } from './figures.js'
+import { Renderer } from './renderer.js'
 
 const boardHtmlElement = document.getElementById("board");
 const scoreHtmlElement = document.getElementById("score");
@@ -13,6 +14,7 @@ let score = 0;
 let gameLoopIntervalId;
 let boardRows = getNewBoardRows();
 let currentFigure = getRandomFigure();
+let renderer = new Renderer(boardRows);
 
 function getNewBoardRows() {
   return Array(boardHeight).fill(Array(boardWidth));
@@ -91,7 +93,9 @@ function slamCurrentFigure() {
 
 function resetBoard() {
   boardRows = getNewBoardRows();
+  renderer = new Renderer(boardRows);
   boardHtmlElement.innerHTML = "";
+
   for (let i = 0; i < boardHeight; i++) {
     const row = document.createElement("div");
     row.classList.add("row");
@@ -110,31 +114,9 @@ function tick() {
   }
 }
 
-function clearBoard() {
-  [...document.querySelectorAll('.tile')].forEach(tile =>
-    tile.className = tile.className
-      .split(' ')
-      .filter(className => !className.startsWith('figure'))
-      .join(' ')
-  )
-}
-
-function drawBlocks() {
-  boardRows.forEach((row, rowIndex) => {
-    row.forEach((tile, tileIndex) => {
-      getHtmlTile({ x: tileIndex, y: rowIndex }).classList.add(tile.className);
-    });
-  });
-}
-
-function render() {
-  clearBoard();
-  drawBlocks();
-};
-
 function gameLoop() {
   tick();
-  render();
+  renderer.render();
 }
 
 export function main() {
