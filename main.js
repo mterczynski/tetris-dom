@@ -17,7 +17,7 @@ let currentFigure = getRandomFigure();
 let renderer = new Renderer(boardRows);
 
 function getNewBoardRows() {
-  return Array(boardHeight).fill(Array(boardWidth));
+  return [...Array(boardHeight)].map(() => Array(boardWidth).fill(''));
 }
 
 function restartGame() {
@@ -59,10 +59,6 @@ function initKeyEventListener() {
       rotateCurrentFigureIfPossible();
     }
   });
-}
-
-function getHtmlTile(position) {
-  return document.querySelector(`.row:nth-child(${position.y + 1}) .tile:nth-child(${position.x + 1})`);
 }
 
 function translateCurrentShapeIfPossible(vector) {
