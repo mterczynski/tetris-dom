@@ -1,5 +1,7 @@
 export function Renderer() {
   const boardHtmlElement = document.getElementById("board");
+  const scoreHtmlElement = document.getElementById("score");
+  const bestScoreHtmlElement = document.getElementById("best-score");
 
   function getHtmlTile(position) {
     return document.querySelector(`.row:nth-child(${position.y + 1}) .tile:nth-child(${position.x + 1})`);
@@ -48,4 +50,7 @@ export function Renderer() {
       }
     }
   }
+
+  this.renderScore = score => scoreHtmlElement.innerHTML = score;
+  this.renderBestScore = bestScore => bestScoreHtmlElement.innerHTML = bestScore;
 }

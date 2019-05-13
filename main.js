@@ -3,13 +3,9 @@
 import { figures } from './figures.js'
 import { Renderer } from './renderer.js'
 
-const scoreHtmlElement = document.getElementById("score");
-const bestScoreHtmlElement = document.getElementById("best-score");
-
 const boardWidth = 10;
 const boardHeight = 15;
 
-let score = 0;
 let gameLoopIntervalId;
 let boardRows = getNewBoardRows();
 let currentFigure = getRandomFigure();
@@ -26,9 +22,9 @@ function restartGame() {
 }
 
 function resetScores() {
-  score = 0;
-  scoreHtmlElement.innerHTML = "0";
-  bestScoreHtmlElement.innerHTML = "0";
+  // todo - update local variables
+  renderer.renderScore(0);
+  renderer.renderBestScore(0);
 }
 
 function getRandomFigure() {
