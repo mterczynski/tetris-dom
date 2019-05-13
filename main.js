@@ -14,7 +14,7 @@ let score = 0;
 let gameLoopIntervalId;
 let boardRows = getNewBoardRows();
 let currentFigure = getRandomFigure();
-let renderer = new Renderer(boardRows);
+let renderer = new Renderer();
 
 function getNewBoardRows() {
   return [...Array(boardHeight)].map(() => Array(boardWidth).fill(''));
@@ -89,7 +89,6 @@ function slamCurrentFigure() {
 
 function resetBoard() {
   boardRows = getNewBoardRows();
-  renderer = new Renderer(boardRows);
   boardHtmlElement.innerHTML = "";
 
   for (let i = 0; i < boardHeight; i++) {
@@ -112,7 +111,7 @@ function tick() {
 
 function gameLoop() {
   tick();
-  renderer.render();
+  renderer.render(boardRows, currentFigure);
 }
 
 export function main() {

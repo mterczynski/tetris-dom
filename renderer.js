@@ -1,4 +1,4 @@
-export function Renderer(boardRows) {
+export function Renderer() {
   function getHtmlTile(position) {
     return document.querySelector(`.row:nth-child(${position.y + 1}) .tile:nth-child(${position.x + 1})`);
   }
@@ -12,7 +12,7 @@ export function Renderer(boardRows) {
     )
   }
 
-  function drawBlocks() {
+  function drawBlocks(boardRows) {
     boardRows.forEach((row, rowIndex) => {
       row.forEach((tile, tileIndex) => {
         if (tile) {
@@ -22,8 +22,13 @@ export function Renderer(boardRows) {
     })
   }
 
-  this.render = () => {
+  function drawCurrentFigure(currentFigure) {
+
+  }
+
+  this.render = (boardRows, currentFigure) => {
     clearBoard();
-    drawBlocks();
+    drawBlocks(boardRows);
+    drawCurrentFigure(currentFigure);
   }
 }
