@@ -1,3 +1,7 @@
+'use strict'
+
+import { figures } from './figures.js'
+
 const boardHtmlElement = document.getElementById("board");
 const scoreHtmlElement = document.getElementById("score");
 const bestScoreHtmlElement = document.getElementById("best-score");
@@ -61,14 +65,14 @@ function getHtmlTile(position) {
 
 function translateCurrentShapeIfPossible(vector) {
   try {
-    // todo
     let newFigure = {
       ...currentFigure,
       x: currentFigure.x + vector.x,
       y: currentFigure.y + vector.y,
     }
 
-    let canTranslate = newFigure.shape.filter(block => block === 1)
+    let canTranslate = newFigure.shape
+      .filter(block => block === 1)
       .every(block => true) // todo
 
     return true;
@@ -133,7 +137,7 @@ function gameLoop() {
   render();
 }
 
-function init() {
+export function main() {
   gameLoopIntervalId = setInterval(gameLoop, 500);
   initKeyEventListener();
   restartGame();

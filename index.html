@@ -60,9 +60,12 @@
       </div>
     </div>
   </div>
-  <script src="figures.js"></script>
-  <script src="main.js"></script>
-  <script>init();</script>
+
+  <script type="module">
+    import { main } from './main.js';
+
+    main();
+  </script>
 </body>
 
 </html>
