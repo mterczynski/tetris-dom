@@ -1,8 +1,4 @@
 export function Renderer() {
-  const boardHtmlElement = document.getElementById("board");
-  const scoreHtmlElement = document.getElementById("score");
-  const bestScoreHtmlElement = document.getElementById("best-score");
-
   function getHtmlTile(position) {
     return document.querySelector(`.row:nth-child(${position.y + 1}) .tile:nth-child(${position.x + 1})`);
   }
@@ -37,6 +33,7 @@ export function Renderer() {
   }
 
   this.recreateBoard = ({ width, height }) => {
+    const boardHtmlElement = document.getElementById("board");
     boardHtmlElement.innerHTML = "";
 
     for (let i = 0; i < height; i++) {
@@ -51,6 +48,13 @@ export function Renderer() {
     }
   }
 
-  this.renderScore = score => scoreHtmlElement.innerHTML = score;
-  this.renderBestScore = bestScore => bestScoreHtmlElement.innerHTML = bestScore;
+  this.renderScore = score => {
+    const scoreHtmlElement = document.getElementById("score");
+    scoreHtmlElement.innerHTML = score;
+  }
+
+  this.renderBestScore = bestScore => {
+    const bestScoreHtmlElement = document.getElementById("best-score");
+    bestScoreHtmlElement.innerHTML = bestScore;
+  }
 }
