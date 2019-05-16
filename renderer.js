@@ -1,38 +1,38 @@
-export function Renderer() {
-  function getHtmlTile(position) {
-    return document.querySelector(`.row:nth-child(${position.y + 1}) .tile:nth-child(${position.x + 1})`);
-  }
+function getHtmlTile(position) {
+  return document.querySelector(`.row:nth-child(${position.y + 1}) .tile:nth-child(${position.x + 1})`);
+}
 
-  function clearBoard() {
-    [...document.querySelectorAll('.tile')].forEach(tile =>
-      tile.className = tile.className
-        .split(' ')
-        .filter(className => !className.startsWith('figure'))
-        .join(' ')
-    )
-  }
+function clearBoard() {
+  [...document.querySelectorAll('.tile')].forEach(tile =>
+    tile.className = tile.className
+      .split(' ')
+      .filter(className => !className.startsWith('figure'))
+      .join(' ')
+  )
+}
 
-  function drawBlocks(boardRows) {
-    boardRows.forEach((row, rowIndex) => {
-      row.forEach((tile, tileIndex) => {
-        if (tile) {
-          getHtmlTile({ x: tileIndex, y: rowIndex }).classList.add(tile);
-        }
-      });
-    })
-  }
+function drawBlocks(boardRows) {
+  boardRows.forEach((row, rowIndex) => {
+    row.forEach((tile, tileIndex) => {
+      if (tile) {
+        getHtmlTile({ x: tileIndex, y: rowIndex }).classList.add(tile);
+      }
+    });
+  })
+}
 
-  function drawCurrentFigure(currentFigure) {
+function drawCurrentFigure(currentFigure) {
+  // todo
+}
 
-  }
-
-  this.render = (boardRows, currentFigure) => {
+export const renderer = {
+  render(boardRows, currentFigure) {
     clearBoard();
     drawBlocks(boardRows);
     drawCurrentFigure(currentFigure);
-  }
+  },
 
-  this.recreateBoard = ({ width, height }) => {
+  recreateBoard({ width, height }) {
     const boardHtmlElement = document.getElementById("board");
     boardHtmlElement.innerHTML = "";
 
@@ -46,14 +46,14 @@ export function Renderer() {
         row.appendChild(tile);
       }
     }
-  }
+  },
 
-  this.renderScore = score => {
+  renderScore(score) {
     const scoreHtmlElement = document.getElementById("score");
     scoreHtmlElement.innerHTML = score;
-  }
+  },
 
-  this.renderBestScore = bestScore => {
+  renderBestScore(bestScore) {
     const bestScoreHtmlElement = document.getElementById("best-score");
     bestScoreHtmlElement.innerHTML = bestScore;
   }

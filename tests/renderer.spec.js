@@ -1,6 +1,4 @@
-import { Renderer } from '../renderer';
-
-const renderer = new Renderer();
+import { renderer } from '../renderer';
 
 beforeEach(() => {
   document.body.innerHTML = ''
