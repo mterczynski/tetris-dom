@@ -33,7 +33,7 @@ function getRandomFigure() {
   return {
     shape: [...figure.shape],
     className: figure.className,
-    y: 0,
+    y: figure.y,
     x: Math.floor(boardWidth / 2 - figure.shape[0].length / 2)
   };
 }

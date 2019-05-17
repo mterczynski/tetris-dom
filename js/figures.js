@@ -6,7 +6,7 @@ export const figures = Object.freeze([
     shape: [
       [0, 1, 0],
       [1, 1, 1],
-    ]
+    ],
   },
   {
     className: 'figure-line',
@@ -54,4 +54,4 @@ export const figures = Object.freeze([
       [1, 1],
     ]
   },
-]);
+].map(figure => ({ ...figure, y: -figure.shape.length })));
