@@ -1,6 +1,4 @@
-function getHtmlTile(position) {
-  return document.querySelector(`.row:nth-child(${position.y + 1}) .tile:nth-child(${position.x + 1})`);
-}
+import { getFigureBlockPositions, getHtmlTile } from "./utils.js";
 
 function clearBoard() {
   [...document.querySelectorAll('.tile')].forEach(tile =>
@@ -22,7 +20,9 @@ function drawBlocks(boardRows) {
 }
 
 function drawCurrentFigure(currentFigure) {
-  // todo
+  getFigureBlockPositions(currentFigure).forEach(block => {
+    getHtmlTile(block).classList.add(currentFigure.className);
+  });
 }
 
 export const renderer = {
