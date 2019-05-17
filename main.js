@@ -1,7 +1,7 @@
 'use strict'
 
 import { figures } from './figures.js'
-import { Renderer } from './renderer.js'
+import { renderer } from './renderer.js'
 
 const boardWidth = 10;
 const boardHeight = 15;
@@ -9,7 +9,6 @@ const boardHeight = 15;
 let gameLoopIntervalId;
 let boardRows = getNewBoardRows();
 let currentFigure = getRandomFigure();
-let renderer = new Renderer();
 
 function getNewBoardRows() {
   return [...Array(boardHeight)].map(() => Array(boardWidth).fill(''));
