@@ -1,4 +1,4 @@
-import { getBlockPositionsFromBoardRows, getFigureBlockPositions, getHtmlTile } from "../js/utils";
+import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getFigureBlockPositions, getHtmlTile } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -95,62 +95,45 @@ describe("utils", () => {
   });
 
   describe('.canTranslateFigureByVector', () => {
-    describe('should return false if figure cannot be translated by specified vector', () => {
-      // given
-      let boardRows = [
-        ['', '', '', ''],
-        ['', '', '', ''],
-        ['x', '', '', 'x'],
-        ['x', 'x', '', 'x'],
-      ];
+    // given
+    let boardRows = [
+      ['', '', '', ''],
+      ['', '', '', ''],
+      ['x', '', '', 'x'],
+      ['x', 'x', '', 'x'],
+    ];
 
-      let vector = { x: 0, y: 1 };
-
-      let figure = {
-        x: 1,
-        y: 0,
-        className: 'figure-pyramid',
-        shape: [
-          [0, 1],
-          [1, 1],
-          [0, 1],
-        ],
-      }
-
-      // when
-      let result = canTranslateFigureByVector(figure, vector, boardRows);
-
-      // then
-      expect(result).toBe(false);
-    });
+    let figure = {
+      x: 1,
+      y: 0,
+      className: 'figure-pyramid',
+      shape: [
+        [0, 1],
+        [1, 1],
+        [0, 1],
+      ],
+    }
 
     describe('should return true if figure can be translated by specified vector', () => {
       // given
-      let boardRows = [
-        ['', '', '', ''],
-        ['', '', '', ''],
-        ['x', '', '', 'x'],
-        ['x', 'x', '', 'x'],
-      ];
-
-      let vector = { x: 1, y: 0 };
-
-      let figure = {
-        x: 1,
-        y: 0,
-        className: 'figure-pyramid',
-        shape: [
-          [0, 1],
-          [1, 1],
-          [0, 1],
-        ],
-      }
+      let vector = { x: 0, y: 1 };
 
       // when
       let result = canTranslateFigureByVector(figure, vector, boardRows);
 
       // then
       expect(result).toBe(true);
+    });
+
+    describe('should return false if figure cannot be translated by specified vector due to fixed blocks blocking its way', () => {
+      // given
+      let vector = { x: 1, y: 0 };
+
+      // when
+      let result = canTranslateFigureByVector(figure, vector, boardRows);
+
+      // then
+      expect(result).toBe(false);
     });
   });
 });

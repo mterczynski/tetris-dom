@@ -19,3 +19,26 @@ export function getFigureBlockPositions({ x, y, shape }) {
   })
     .reduce((acc, nextRow) => acc.concat(nextRow), [])
 }
+
+export function getBlockPositionsFromBoardRows(boardRows) {
+  return getFigureBlockPositions({
+    x: 0,
+    y: 0,
+    shape: boardRows
+  });
+}
+
+export function canTranslateFigureByVector(figure, vector, boardRows) {
+  let figureBlockPosition = getFigureBlockPositions(figure);
+  let translatedFigureBlockPosition = figureBlockPosition.map(block => ({
+    x: block.x + vector.x,
+    y: block.y + vector.y,
+  }));
+
+  let boardBlockPositions = getBlockPositionsFromBoardRows(boardRows);
+
+  return !boardBlockPositions.some(block => translatedFigureBlockPosition.find(
+    translatedBlock => translatedBlock.x === block.x &&
+      translatedBlock.y === block.y
+  ));
+}
