@@ -2,10 +2,13 @@
 
 import { figures } from "./figures.js";
 import { renderer } from "./renderer.js";
+import { canTranslateFigureByVector } from "./utils.js";
 
 const boardWidth = 10;
 const boardHeight = 15;
 
+let score = 0;
+let bestScore = 0;
 let gameLoopIntervalId;
 
 let boardRows = getNewBoardRows();
@@ -22,7 +25,7 @@ function restartGame() {
 }
 
 function resetScores() {
-  // todo - update local variables
+  score = 0;
   renderer.renderScore(0);
   renderer.renderBestScore(0);
 }
@@ -38,53 +41,28 @@ function getRandomFigure() {
   };
 }
 
-function getFigureBlockPosition(figure) {
-  // todo
-}
-
 function initKeyEventListener() {
   document.addEventListener("keypress", ({ key }) => {
     if (key === "ArrowLeft" || "a" || "A") {
-      translateCurrentShapeIfPossible({ x: -1, y: 0 });
+      // todo
     } else if (key === "ArrowRight" || "d" || "D") {
-      translateCurrentShapeIfPossible({ x: 1, y: 0 });
+      // todo
     } else if (key === "ArrowDown" || "s" || "S") {
-      slamCurrentFigure();
+      // todo
     } else if (key === "ArrowUp" || "w" || "W") {
-      rotateCurrentFigureIfPossible();
+      // todo
     }
   });
 }
 
-function translateCurrentShapeIfPossible(vector) {
-  try {
-    let newFigure = {
-      ...currentFigure,
-      x: currentFigure.x + vector.x,
-      y: currentFigure.y + vector.y
-    };
-
-    let canTranslate = newFigure.shape
-      .filter(block => block === 1)
-      .every(block => true); // todo
-
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function rotateCurrentFigureIfPossible() {
-  // todo
-}
-
-function slamCurrentFigure() {
-  // todo
-}
-
 function tick() {
-  if (!translateCurrentShapeIfPossible({ x: 0, y: 1 })) {
-    // todo - lock figure, check for full row, check for loss, spawn new figure if not lost
+  if (canTranslateFigureByVector(currentFigure, { x: 0, y: 1 }, boardRows)) {
+    currentFigure = {
+      ...currentFigure,
+      y: currentFigure.y + 1,
+    };
+  } else {
+    // todo
   }
 }
 
