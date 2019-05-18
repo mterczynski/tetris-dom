@@ -1,4 +1,4 @@
-import { getFigureBlockPositions, getHtmlTile } from "../js/utils";
+import { getBlockPositionsFromBoardRows, getFigureBlockPositions, getHtmlTile } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -69,6 +69,88 @@ describe("utils", () => {
 
       // then
       expect(selectedTile.innerHTML).toBe('expected');
+    });
+  });
+
+  describe('.getBlockPositionsFromBoardRows', () => {
+    describe('should return array of all block positions from board rows', () => {
+      // given
+      let boardRows = [
+        ['', '', ''],
+        ['', 'x', ''],
+        ['x', '', 'x'],
+        ['', 'x', 'x']
+      ];
+
+      // when
+      let blockPositions = getBlockPositionsFromBoardRows(boardRows);
+
+      // then
+      expect(blockPositions).toEqual(expect.arrayContaining([
+        { x: 1, y: 1 },
+        { x: 0, y: 2 }, { x: 2, y: 2 },
+        { x: 1, y: 3 }, { x: 2, y: 3 },
+      ]));
+    });
+  });
+
+  describe('.canTranslateFigureByVector', () => {
+    describe('should return false if figure cannot be translated by specified vector', () => {
+      // given
+      let boardRows = [
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['x', '', '', 'x'],
+        ['x', 'x', '', 'x'],
+      ];
+
+      let vector = { x: 0, y: 1 };
+
+      let figure = {
+        x: 1,
+        y: 0,
+        className: 'figure-pyramid',
+        shape: [
+          [0, 1],
+          [1, 1],
+          [0, 1],
+        ],
+      }
+
+      // when
+      let result = canTranslateFigureByVector(figure, vector, boardRows);
+
+      // then
+      expect(result).toBe(false);
+    });
+
+    describe('should return true if figure can be translated by specified vector', () => {
+      // given
+      let boardRows = [
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['x', '', '', 'x'],
+        ['x', 'x', '', 'x'],
+      ];
+
+      let vector = { x: 1, y: 0 };
+
+      let figure = {
+        x: 1,
+        y: 0,
+        className: 'figure-pyramid',
+        shape: [
+          [0, 1],
+          [1, 1],
+          [0, 1],
+        ],
+      }
+
+      // when
+      let result = canTranslateFigureByVector(figure, vector, boardRows);
+
+      // then
+      expect(result).toBe(true);
     });
   });
 });
