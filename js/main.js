@@ -41,15 +41,27 @@ function getRandomFigure() {
   };
 }
 
+function moveCurrentFigureByVectorIfPossible(vector, boardRows) {
+  if (canTranslateFigureByVector(currentFigure, vector, boardRows)) {
+    currentFigure = {
+      ...currentFigure,
+      x: currentFigure.x + vector.x,
+      y: currentFigure.y + vector.y,
+    }
+  }
+  renderer.render(boardRows, currentFigure);
+}
+
 function initKeyEventListener() {
   document.addEventListener("keypress", ({ key }) => {
-    if (key === "ArrowLeft" || "a" || "A") {
+    // todo - test arrows
+    if (["ArrowLeft", "a", "A"].includes(key)) {
+      moveCurrentFigureByVectorIfPossible({ x: -1, y: 0 }, boardRows);
+    } else if (["ArrowRight", "d", "D"].includes(key)) {
+      moveCurrentFigureByVectorIfPossible({ x: 1, y: 0 }, boardRows);
+    } else if (["ArrowDown", "s", "S"].includes(key)) {
       // todo
-    } else if (key === "ArrowRight" || "d" || "D") {
-      // todo
-    } else if (key === "ArrowDown" || "s" || "S") {
-      // todo
-    } else if (key === "ArrowUp" || "w" || "W") {
+    } else if (["ArrowUp", "w", "W"].includes(key)) {
       // todo
     }
   });
