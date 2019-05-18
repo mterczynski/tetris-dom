@@ -100,7 +100,7 @@ describe("utils", () => {
       ['', '', '', ''],
       ['', '', '', ''],
       ['x', '', '', 'x'],
-      ['x', 'x', '', 'x'],
+      ['x', '', '', 'x'],
     ];
 
     let figure = {
@@ -128,6 +128,53 @@ describe("utils", () => {
     describe('should return false if figure cannot be translated by specified vector due to fixed blocks blocking its way', () => {
       // given
       let vector = { x: 1, y: 0 };
+
+      // when
+      let result = canTranslateFigureByVector(figure, vector, boardRows);
+
+      // then
+      expect(result).toBe(false);
+    });
+
+    describe('should return false if figure cannot be translated by specified vector due to touching board bottom', () => {
+      // given
+      let vector = { x: 0, y: 2 };
+
+      // when
+      let result = canTranslateFigureByVector(figure, vector, boardRows);
+
+      // then
+      expect(result).toBe(false);
+    });
+
+    describe('should return false if figure cannot be translated by specified vector due to being partially outside board\'s left border', () => {
+      // given
+      let boardRows = [
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['', '', '', 'x'],
+        ['x', '', '', 'x'],
+      ];
+
+      let vector = { x: -2, y: 0 }
+
+      // when
+      let result = canTranslateFigureByVector(figure, vector, boardRows);
+
+      // then
+      expect(result).toBe(false);
+    });
+
+    describe('should return false if figure cannot be translated by specified vector due to being partially outside board\'s right border', () => {
+      // given
+      let boardRows = [
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['x', '', '', ''],
+        ['x', '', '', 'x'],
+      ];
+
+      let vector = { x: 2, y: 0 }
 
       // when
       let result = canTranslateFigureByVector(figure, vector, boardRows);

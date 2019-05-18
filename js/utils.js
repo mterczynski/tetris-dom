@@ -37,6 +37,14 @@ export function canTranslateFigureByVector(figure, vector, boardRows) {
 
   let boardBlockPositions = getBlockPositionsFromBoardRows(boardRows);
 
+  if (translatedFigureBlockPosition.some(block =>
+    block.y >= boardRows.length ||
+    block.x < 0 ||
+    block.x >= boardRows[0].length
+  )) {
+    return false;
+  }
+
   return !boardBlockPositions.some(block => translatedFigureBlockPosition.find(
     translatedBlock => translatedBlock.x === block.x &&
       translatedBlock.y === block.y
