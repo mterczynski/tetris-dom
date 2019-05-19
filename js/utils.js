@@ -50,3 +50,16 @@ export function canTranslateFigureByVector(figure, vector, boardRows) {
       translatedBlock.y === block.y
   ));
 }
+
+export function getSlammedFigure(figure, boardRows) {
+  let slammedFigure = {
+    ...figure,
+    shape: [...figure.shape],
+  }
+
+  while (canTranslateFigureByVector(slammedFigure, { x: 0, y: 1 }, boardRows)) {
+    slammedFigure.y++;
+  }
+
+  return slammedFigure
+}

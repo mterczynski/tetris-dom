@@ -1,6 +1,6 @@
 import { figures } from "./figures.js";
 import { renderer } from "./renderer.js";
-import { canTranslateFigureByVector } from "./utils.js";
+import { canTranslateFigureByVector, getSlammedFigure } from "./utils.js";
 
 const boardWidth = 10;
 const boardHeight = 15;
@@ -50,6 +50,16 @@ function moveCurrentFigureByVectorIfPossible(vector, boardRows) {
   renderer.render(boardRows, currentFigure);
 }
 
+function placeFigureInBoard() {
+  // todo
+}
+
+function slamCurrentFigure() {
+  currentFigure = getSlammedFigure(currentFigure, boardRows);
+  renderer.render(boardRows, currentFigure);
+  placeFigureInBoard();
+}
+
 function initKeyEventListener() {
   document.addEventListener("keypress", ({ key }) => {
     // todo - test arrows
@@ -58,9 +68,9 @@ function initKeyEventListener() {
     } else if (["ArrowRight", "d", "D"].includes(key)) {
       moveCurrentFigureByVectorIfPossible({ x: 1, y: 0 }, boardRows);
     } else if (["ArrowDown", "s", "S"].includes(key)) {
-      // todo
+      slamCurrentFigure();
     } else if (["ArrowUp", "w", "W"].includes(key)) {
-      // todo
+      // todo rotate figure
     }
   });
 }
@@ -72,7 +82,7 @@ function tick() {
       y: currentFigure.y + 1,
     };
   } else {
-    // todo
+    placeFigureInBoard();
   }
 }
 

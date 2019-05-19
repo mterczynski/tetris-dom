@@ -1,4 +1,4 @@
-import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getFigureBlockPositions, getHtmlTile } from "../js/utils";
+import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getFigureBlockPositions, getHtmlTile, getSlammedFigure } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -183,4 +183,60 @@ describe("utils", () => {
       expect(result).toBe(false);
     });
   });
+
+  describe('.getSlammedFigure', () => {
+    // given
+    let figure = {
+      x: 1,
+      y: 0,
+      className: 'figure-pyramid',
+      shape: [
+        [0, 1],
+        [1, 1],
+        [0, 1],
+      ],
+    }
+
+    describe('should return figure position after being slammed when board is empty', () => {
+      // given
+      let boardRows = [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', ''],
+      ]
+
+      // when
+      let slammedFigure = getSlammedFigure(figure, boardRows)
+
+      // then
+      expect(slammedFigure).toEqual({
+        ...figure,
+        y: 3
+      });
+    })
+
+    describe('should return figure position after being slammed when it lands on blocks', () => {
+      // given
+      let boardRows = [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', ''],
+        ['x', 'x', 'x'],
+      ]
+
+      // when
+      let slammedFigure = getSlammedFigure(figure, boardRows)
+
+      // then
+      expect(slammedFigure).toEqual({
+        ...figure,
+        y: 2
+      });
+    })
+  })
 });
