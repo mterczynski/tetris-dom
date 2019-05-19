@@ -1,5 +1,3 @@
-'use strict';
-
 export const figures = Object.freeze([
   {
     className: 'figure-pyramid',

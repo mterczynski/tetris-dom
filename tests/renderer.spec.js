@@ -27,7 +27,7 @@ describe("renderer", () => {
     expect(document.getElementById("best-score").innerHTML).toBe("123");
   });
 
-  test(".recreateBoard({width: 3, height: 5}) should clear old board and create new one", () => {
+  test(".recreateBoard should clear old board and create new one", () => {
     // given
     const newBoardDimensions = { width: 3, height: 5 };
 

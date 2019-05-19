@@ -1,5 +1,3 @@
-"use strict";
-
 import { figures } from "./figures.js";
 import { renderer } from "./renderer.js";
 import { canTranslateFigureByVector } from "./utils.js";
