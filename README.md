@@ -13,6 +13,13 @@ npm start
 ```
 
 ## Testing
+
 ```
 npm test
+```
+
+## Test coverage
+
+```
+npm run test:cov
 ```
