@@ -11,3 +11,8 @@ npm i
 ```bash
 npm start
 ```
+
+## Testing
+```
+npm test
+```
