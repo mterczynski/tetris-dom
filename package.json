@@ -5,6 +5,7 @@
   "main": "index.html",
   "scripts": {
     "test": "jest",
+    "test:cov", "jest --coverage"
     "start": "http-server -p 3000"
   },
   "repository": {
