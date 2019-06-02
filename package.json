@@ -5,12 +5,12 @@
   "main": "index.html",
   "scripts": {
     "test": "jest",
-    "test:cov", "jest --coverage"
+    "test:cov": "jest --coverage",
     "start": "http-server -p 3000"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mterczynski/tetris-dom.git"
+    "url": "https://github.com/mterczynski/tetris-dom.git"
   },
   "keywords": [
     "tetris"
