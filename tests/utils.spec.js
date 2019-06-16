@@ -166,22 +166,63 @@ describe("utils", () => {
     });
 
     describe('should return false if figure cannot be translated by specified vector due to being partially outside board\'s right border', () => {
-      // given
-      let boardRows = [
-        ['', '', '', ''],
-        ['', '', '', ''],
-        ['x', '', '', ''],
-        ['x', '', '', 'x'],
-      ];
 
-      let vector = { x: 2, y: 0 }
+      describe('when figure is fully inside board', () => {
+        // given
+        let vector = { x: 2, y: 0 }
 
-      // when
-      let result = canTranslateFigureByVector(figure, vector, boardRows);
+        // when
+        let result = canTranslateFigureByVector(figure, vector, boardRows);
 
-      // then
-      expect(result).toBe(false);
+        // then
+        expect(result).toBe(false);
+      })
+
+      describe('when figure is fully above board', () => {
+        // given
+        let figure = {
+          x: 2,
+          y: -4,
+          className: 'figure-pyramid',
+          shape: [
+            [0, 1],
+            [1, 1],
+            [0, 1],
+          ],
+        }
+
+        let vector = { x: 1, y: 0 }
+
+        // when
+        let result = canTranslateFigureByVector(figure, vector, boardRows);
+
+        // then
+        expect(result).toBe(false);
+      })
+
+      describe('when figure is partially above board', () => {
+        let figure = {
+          x: 2,
+          y: -2,
+          className: 'figure-pyramid',
+          shape: [
+            [0, 1],
+            [1, 1],
+            [0, 1],
+          ],
+        }
+
+        let vector = { x: 1, y: 0 }
+
+        // when
+        let result = canTranslateFigureByVector(figure, vector, boardRows);
+
+        // then
+        expect(result).toBe(false);
+      })
     });
+
+
   });
 
   describe('.getSlammedFigure', () => {
