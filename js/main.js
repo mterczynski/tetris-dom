@@ -5,10 +5,6 @@ import { canTranslateFigureByVector, getFigureBlockPositions, getSlammedFigure }
 const boardWidth = 10;
 const boardHeight = 15;
 
-let score = 0;
-let bestScore = 0;
-let gameLoopIntervalId;
-
 let boardRows = getNewBoardRows();
 let currentFigure = getRandomFigure();
 
@@ -18,14 +14,7 @@ function getNewBoardRows() {
 
 function restartGame() {
   renderer.recreateBoard({ width: boardWidth, height: boardHeight });
-  resetScores();
   currentFigure = getRandomFigure();
-}
-
-function resetScores() {
-  score = 0;
-  renderer.renderScore(0);
-  renderer.renderBestScore(0);
 }
 
 function getRandomFigure() {
@@ -97,7 +86,7 @@ function gameLoop() {
 }
 
 export function main() {
-  gameLoopIntervalId = setInterval(gameLoop, 500);
+  setInterval(gameLoop, 500);
   initKeyEventListener();
   restartGame();
 }
