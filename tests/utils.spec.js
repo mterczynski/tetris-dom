@@ -220,7 +220,7 @@ describe("utils", () => {
         let vector = { x: 1, y: 0 }
 
         // when
-        let result = canTranslateFigureByVector(figure, vector, boardRows, true);
+        let result = canTranslateFigureByVector(figure, vector, boardRows);
 
         // then
         expect(result).toBe(false);

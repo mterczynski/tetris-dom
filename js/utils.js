@@ -32,7 +32,7 @@ export function getBlockPositionsFromBoardRows(boardRows) {
   });
 }
 
-export function canTranslateFigureByVector(figure, vector, boardRows, debug) {
+export function canTranslateFigureByVector(figure, vector, boardRows) {
   let figureBlockPosition = getFigureBlockPositions(figure);
   let translatedFigureBlockPosition = figureBlockPosition.map(block => ({
     x: block.x + vector.x,
@@ -40,10 +40,6 @@ export function canTranslateFigureByVector(figure, vector, boardRows, debug) {
   }));
 
   let boardBlockPositions = getBlockPositionsFromBoardRows(boardRows);
-
-  if (debug) {
-    // debugger
-  }
 
   if (translatedFigureBlockPosition.some(block =>
     block.y >= boardRows.length ||
