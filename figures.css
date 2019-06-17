@@ -1,27 +1,27 @@
 .figure-pyramid {
-  background: purple;
+  background: hsl(185, 100%, 50%);
 }
 
 .figure-square {
-  background: navy;
+  background: hsl(123, 100%, 50%);
 }
 
 .figure-line {
-  background: chartreuse;
+  background: hsl(54, 100%, 50%);
 }
 
 .figure-s {
-  background: crimson;
+  background: hsl(229, 100%, 50%)
 }
 
 .figure-z {
-  background: orange;
+  background: hsl(0, 100%, 50%);
 }
 
 .figure-j {
-  background: darkgreen;
+  background: hsl(278, 100%, 50%)
 }
 
 .figure-l {
-  background: magenta;
+  background: hsl(27, 100%, 50%);
 }
