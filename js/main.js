@@ -1,6 +1,6 @@
 import { figures } from "./figures.js";
 import { renderer } from "./renderer.js";
-import { canTranslateFigureByVector, getFigureBlockPositions, getSlammedFigure, getFullRows, getBoardAfterPoppingRows } from "./utils.js";
+import { canTranslateFigureByVector, getBoardAfterPoppingRows, getFigureBlockPositions, getFullRows, getSlammedFigure, isFigurePartiallyAboveBoard } from "./utils.js";
 
 const boardWidth = 10;
 const boardHeight = 15;
@@ -82,6 +82,9 @@ function tick() {
       ...currentFigure,
       y: currentFigure.y + 1,
     };
+  } else if (isFigurePartiallyAboveBoard(currentFigure)) {
+    // todo - game over
+    console.log('game over')
   } else {
     placeFigureInBoard(currentFigure, boardRows);
     popFullRows();

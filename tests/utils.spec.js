@@ -1,4 +1,4 @@
-import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getHtmlTile, getSlammedFigure, getFullRows, getBoardAfterPoppingRows } from "../js/utils";
+import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFullRows, getHtmlTile, getSlammedFigure, isFigurePartiallyAboveBoard } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -247,8 +247,6 @@ describe("utils", () => {
         expect(result).toBe(false);
       })
     });
-
-
   });
 
   describe('.getSlammedFigure', () => {
@@ -349,5 +347,43 @@ describe("utils", () => {
     ]
 
     expect(boardAfterPopping).toEqual(expectedBoard);
+  })
+
+  describe('isFigurePartiallyAboveBoard', () => {
+    describe('should return true if figure is partially above board', () => {
+      // given
+      const figure = {
+        x: 0,
+        y: -1,
+        shape: [
+          [0, 1, 0],
+          [1, 1, 1]
+        ]
+      }
+
+      // when
+      const result = isFigurePartiallyAboveBoard(figure);
+
+      // then
+      expect(result).toBe(true);
+    })
+
+    describe('should return false if figure is not partially or fully above board', () => {
+      // given
+      const figure = {
+        x: 0,
+        y: 0,
+        shape: [
+          [0, 1, 0],
+          [1, 1, 1]
+        ]
+      }
+
+      // when
+      const result = isFigurePartiallyAboveBoard(figure);
+
+      // then
+      expect(result).toBe(false);
+    })
   })
 });

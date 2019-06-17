@@ -71,7 +71,7 @@ export function getSlammedFigure(figure, boardRows) {
 export function getFullRows(boardRows) {
   return boardRows
     .map(row => row.every(tile => tile))
-    .map((isFullFlag, flagIndex) => isFullFlag ? flagIndex: null)
+    .map((isFullFlag, flagIndex) => isFullFlag ? flagIndex : null)
     .filter(el => el !== null)
 }
 
@@ -80,4 +80,8 @@ export function getBoardAfterPoppingRows(indexesOfRowsToPop, boardRows) {
     ...Array(indexesOfRowsToPop.length).fill(Array(boardRows[0].length).fill('')),
     ...(boardRows.filter((boardRow, rowIndex) => !indexesOfRowsToPop.includes(rowIndex)))
   ]
+}
+
+export function isFigurePartiallyAboveBoard(figure) {
+  return figure.y < 0;
 }
