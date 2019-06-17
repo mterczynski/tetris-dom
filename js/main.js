@@ -1,6 +1,6 @@
 import { figures } from "./figures.js";
 import { renderer } from "./renderer.js";
-import { canTranslateFigureByVector, getFigureBlockPositions, getSlammedFigure } from "./utils.js";
+import { canTranslateFigureByVector, getFigureBlockPositions, getSlammedFigure, getFullRows, getBoardAfterPoppingRows } from "./utils.js";
 
 const boardWidth = 10;
 const boardHeight = 15;
@@ -51,6 +51,7 @@ function placeFigureInBoard(figure, boardRows) {
 function slamCurrentFigure() {
   currentFigure = getSlammedFigure(currentFigure, boardRows);
   placeFigureInBoard(currentFigure, boardRows);
+  popFullRows();
   renderer.render(boardRows, currentFigure);
 }
 
@@ -69,6 +70,12 @@ function initKeyEventListener() {
   });
 }
 
+function popFullRows() {
+  const fullRows = getFullRows(boardRows);
+  // todo - add score
+  boardRows = getBoardAfterPoppingRows(fullRows, boardRows);
+}
+
 function tick() {
   if (canTranslateFigureByVector(currentFigure, { x: 0, y: 1 }, boardRows)) {
     currentFigure = {
@@ -77,6 +84,7 @@ function tick() {
     };
   } else {
     placeFigureInBoard(currentFigure, boardRows);
+    popFullRows();
   }
 }
 

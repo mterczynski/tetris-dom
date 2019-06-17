@@ -76,8 +76,8 @@ export function getFullRows(boardRows) {
 }
 
 export function getBoardAfterPoppingRows(indexesOfRowsToPop, boardRows) {
-  // return [
-  //   ...Array(indexesOfRowsToPop).fill(Array(boardRows[0].length).fill('')),
-  //   ...(indexesOfRowsToPop.map(rowIndex => boardRows))
-  // ]
+  return [
+    ...Array(indexesOfRowsToPop.length).fill(Array(boardRows[0].length).fill('')),
+    ...(boardRows.filter((boardRow, rowIndex) => !indexesOfRowsToPop.includes(rowIndex)))
+  ]
 }
