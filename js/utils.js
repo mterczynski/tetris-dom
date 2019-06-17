@@ -11,13 +11,17 @@ export function getFigureBlockPositions({ x, y, shape }) {
         exists: block,
       }))
       .filter(block => block.exists)
-      .filter(block => block.y >= 0)
       .map(block => ({
         x: block.x,
         y: block.y,
       }));
   })
     .reduce((acc, nextRow) => acc.concat(nextRow), [])
+}
+
+export function getFigureBlockPositionsInsideBoard(figure) {
+  return getFigureBlockPositions(figure)
+    .filter(block => block.y >= 0)
 }
 
 export function getBlockPositionsFromBoardRows(boardRows) {
