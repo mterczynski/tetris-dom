@@ -11,13 +11,17 @@ export function getFigureBlockPositions({ x, y, shape }) {
         exists: block,
       }))
       .filter(block => block.exists)
-      .filter(block => block.y >= 0)
       .map(block => ({
         x: block.x,
         y: block.y,
       }));
   })
     .reduce((acc, nextRow) => acc.concat(nextRow), [])
+}
+
+export function getFigureBlockPositionsInsideBoard(figure) {
+  return getFigureBlockPositions(figure)
+    .filter(block => block.y >= 0)
 }
 
 export function getBlockPositionsFromBoardRows(boardRows) {
@@ -28,7 +32,7 @@ export function getBlockPositionsFromBoardRows(boardRows) {
   });
 }
 
-export function canTranslateFigureByVector(figure, vector, boardRows) {
+export function canTranslateFigureByVector(figure, vector, boardRows, debug) {
   let figureBlockPosition = getFigureBlockPositions(figure);
   let translatedFigureBlockPosition = figureBlockPosition.map(block => ({
     x: block.x + vector.x,
@@ -36,6 +40,10 @@ export function canTranslateFigureByVector(figure, vector, boardRows) {
   }));
 
   let boardBlockPositions = getBlockPositionsFromBoardRows(boardRows);
+
+  if (debug) {
+    // debugger
+  }
 
   if (translatedFigureBlockPosition.some(block =>
     block.y >= boardRows.length ||

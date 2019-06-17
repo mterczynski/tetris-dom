@@ -1,4 +1,4 @@
-import { getFigureBlockPositions, getHtmlTile } from "./utils.js";
+import { getFigureBlockPositionsInsideBoard, getHtmlTile } from "./utils.js";
 
 function clearBoard() {
   [...document.querySelectorAll('.tile')].forEach(tile =>
@@ -20,7 +20,7 @@ function drawBlocks(boardRows) {
 }
 
 function drawCurrentFigure(currentFigure) {
-  getFigureBlockPositions(currentFigure).forEach(block => {
+  getFigureBlockPositionsInsideBoard(currentFigure).forEach(block => {
     getHtmlTile(block).classList.add(currentFigure.className);
   });
 }
@@ -29,7 +29,7 @@ export const renderer = {
   render(boardRows, currentFigure) {
     clearBoard();
     drawBlocks(boardRows);
-    drawCurrentFigure(currentFigure);
+    drawCurrentFigure(currentFigure, boardRows[0].length);
   },
 
   recreateBoard({ width, height }) {

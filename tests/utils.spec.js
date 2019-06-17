@@ -1,4 +1,4 @@
-import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getFigureBlockPositions, getHtmlTile, getSlammedFigure } from "../js/utils";
+import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getHtmlTile, getSlammedFigure } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -25,7 +25,7 @@ describe("utils", () => {
       ]));
     });
 
-    test("shouldn't return block positions that are above the board", () => {
+    test("should return block positions that are above the board", () => {
       // given
       let figure = {
         x: 0,
@@ -40,12 +40,37 @@ describe("utils", () => {
       let blockPositions = getFigureBlockPositions(figure);
 
       // then
+      debugger;
+
       expect(blockPositions).toEqual(expect.arrayContaining([
         { y: 0, x: 1 },
         { y: 0, x: 2 },
       ]));
     });
   });
+
+  describe('getFigureBlockPositionsInsideBoard', () => {
+    test('should return only those block positions of provided figure that are inside the board', () => {
+      // given
+      let figure = {
+        x: 0,
+        y: -1,
+        shape: [
+          [0, 1],
+          [1, 1],
+          [0, 1],
+        ]
+      }
+      // when
+      let blockPositions = getFigureBlockPositionsInsideBoard(figure)
+      // then
+      expect(blockPositions).toEqual(expect.arrayContaining([
+        { x: 1, y: 1 },
+        { x: 0, y: 2 }, { x: 2, y: 2 },
+        { x: 1, y: 3 }, { x: 2, y: 3 },
+      ]));
+    })
+  })
 
   describe(".getHtmlTile", () => {
     test("should return html tile with corresponding coordinates", () => {
@@ -194,7 +219,7 @@ describe("utils", () => {
         let vector = { x: 1, y: 0 }
 
         // when
-        let result = canTranslateFigureByVector(figure, vector, boardRows);
+        let result = canTranslateFigureByVector(figure, vector, boardRows, true);
 
         // then
         expect(result).toBe(false);
