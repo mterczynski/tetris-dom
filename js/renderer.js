@@ -29,7 +29,7 @@ export const renderer = {
   render(boardRows, currentFigure) {
     clearBoard();
     drawBlocks(boardRows);
-    drawCurrentFigure(currentFigure, boardRows[0].length);
+    drawCurrentFigure(currentFigure);
   },
 
   recreateBoard({ width, height }) {
