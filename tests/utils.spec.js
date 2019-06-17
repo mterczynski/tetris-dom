@@ -40,12 +40,13 @@ describe("utils", () => {
       let blockPositions = getFigureBlockPositions(figure);
 
       // then
-      debugger;
-
       expect(blockPositions).toEqual(expect.arrayContaining([
+        { y: -1, x: 0 },
+        { y: -1, x: 1 },
         { y: 0, x: 1 },
         { y: 0, x: 2 },
       ]));
+      expect(blockPositions.length).toBe(4);
     });
   });
 
@@ -65,10 +66,10 @@ describe("utils", () => {
       let blockPositions = getFigureBlockPositionsInsideBoard(figure)
       // then
       expect(blockPositions).toEqual(expect.arrayContaining([
+        { x: 0, y: 0 }, { x: 1, y: 0 },
         { x: 1, y: 1 },
-        { x: 0, y: 2 }, { x: 2, y: 2 },
-        { x: 1, y: 3 }, { x: 2, y: 3 },
       ]));
+      expect(blockPositions.length).toEqual(3);
     })
   })
 
