@@ -1,4 +1,4 @@
-import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getHtmlTile, getSlammedFigure } from "../js/utils";
+import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getHtmlTile, getSlammedFigure, getFullRows, getBoardAfterPoppingRows } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -305,5 +305,49 @@ describe("utils", () => {
         y: 2
       });
     })
+  })
+
+  describe('getFullRows should return indexes of all full rows', () => {
+    // given
+    let boardRows = [
+      ['', '', '', 'x', ''],
+      ['', 'x', 'x', 'x', 'x'],
+      ['x', 'x', 'x', 'x', 'x'],
+      ['x', 'x', 'x', '', 'x'],
+      ['x', 'x', 'x', 'x', 'x'],
+    ];
+
+    // when
+    let fullRowsIndexes = getFullRows(boardRows);
+
+    // then
+    expect(fullRowsIndexes).toEqual([2, 4]);
+  })
+
+  describe('getBoardAfterPoppingRows', () => {
+    // given
+    let boardRows = [
+      ['', '', '', 'x', ''],
+      ['', 'x', 'x', 'x', 'x'],
+      ['x', 'x', 'x', 'x', 'x'],
+      ['x', 'x', 'x', '', 'x'],
+      ['x', 'x', 'x', 'x', 'x'],
+    ];
+
+    let indexesOfRowsToPop = [2, 4];
+
+    // when
+    let boardAfterPopping = getBoardAfterPoppingRows(indexesOfRowsToPop, boardRows);
+
+    // expect
+    let expectedBoard = [
+      ['', '', '', '', ''],
+      ['', '', '', '', ''],
+      ['', '', '', 'x', ''],
+      ['', 'x', 'x', 'x', 'x'],
+      ['x', 'x', 'x', '', 'x'],
+    ]
+
+    expect(boardAfterPopping).toEqual(expectedBoard);
   })
 });

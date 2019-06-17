@@ -67,3 +67,17 @@ export function getSlammedFigure(figure, boardRows) {
 
   return slammedFigure
 }
+
+export function getFullRows(boardRows) {
+  return boardRows
+    .map(row => row.every(tile => tile))
+    .map((isFullFlag, flagIndex) => isFullFlag ? flagIndex: null)
+    .filter(el => el !== null)
+}
+
+export function getBoardAfterPoppingRows(indexesOfRowsToPop, boardRows) {
+  // return [
+  //   ...Array(indexesOfRowsToPop).fill(Array(boardRows[0].length).fill('')),
+  //   ...(indexesOfRowsToPop.map(rowIndex => boardRows))
+  // ]
+}
