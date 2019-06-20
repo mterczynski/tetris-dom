@@ -19,9 +19,10 @@ export function getFigureBlockPositions({ x, y, shape }) {
     .reduce((acc, nextRow) => acc.concat(nextRow), [])
 }
 
-export function getFigureBlockPositionsInsideBoard(figure) {
+export function getFigureBlockPositionsInsideBoard(figure, boardHeight) {
   return getFigureBlockPositions(figure)
     .filter(block => block.y >= 0)
+    .filter(block => block.y < boardHeight)
 }
 
 export function getBlockPositionsFromBoardRows(boardRows) {
@@ -49,9 +50,9 @@ export function canTranslateFigureByVector(figure, vector, boardRows) {
     return false;
   }
 
-  return !boardBlockPositions.some(block => translatedFigureBlockPosition.find(
-    translatedBlock => translatedBlock.x === block.x &&
-      translatedBlock.y === block.y
+  return !boardBlockPositions.some(block => translatedFigureBlockPosition.find(translatedBlock =>
+    translatedBlock.x === block.x &&
+    translatedBlock.y === block.y
   ));
 }
 
@@ -108,5 +109,21 @@ export function getRotatedBlockPositions(center, blockPositions) {
   return blockPositions.map(block => ({
     x: center.x + center.y - block.y,
     y: center.y - center.x + block.x
-  }))
+  }));
+}
+
+export function canFigureBeRotatedAsNewFigure(newFigure, boardRows) {
+  const allFigureBlocks = getFigureBlockPositions(newFigure);
+
+  const areSomeBlocksInvalid = allFigureBlocks.some(block =>
+    block.x < 0 ||
+    block.x >= boardRows[0].length ||
+    block.y >= boardRows.length
+  )
+
+  if (areSomeBlocksInvalid) {
+    return false;
+  }
+
+  return !getFigureBlockPositionsInsideBoard(newFigure, boardRows.length).some(block => boardRows[block.y][block.x]);
 }

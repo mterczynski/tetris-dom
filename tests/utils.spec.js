@@ -1,4 +1,4 @@
-import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFullRows, getHtmlTile, getRotatedBlockPositions, getSlammedFigure, isFigurePartiallyAboveBoard } from "../js/utils";
+import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFullRows, getHtmlTile, getRotatedBlockPositions, getSlammedFigure, isFigurePartiallyAboveBoard } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -26,7 +26,7 @@ describe("utils", () => {
       expect(blockPositions.length).toBe(4);
     });
 
-    test("should return block positions that are above the board", () => {
+    test("should return only these block positions that are above the board", () => {
       // given
       let figure = {
         x: 0,
@@ -52,7 +52,7 @@ describe("utils", () => {
   });
 
   describe('getFigureBlockPositionsInsideBoard', () => {
-    test('should return only those block positions of provided figure that are inside the board', () => {
+    test('should return only these block positions of provided figure that are inside the board', () => {
       // given
       let figure = {
         x: 0,
@@ -63,14 +63,39 @@ describe("utils", () => {
           [0, 1],
         ]
       }
+
+      const boardHeight = 10;
+
       // when
-      let blockPositions = getFigureBlockPositionsInsideBoard(figure)
+      let blockPositions = getFigureBlockPositionsInsideBoard(figure, boardHeight)
       // then
       expect(blockPositions).toEqual(expect.arrayContaining([
         { x: 0, y: 0 }, { x: 1, y: 0 },
         { x: 1, y: 1 },
       ]));
       expect(blockPositions.length).toEqual(3);
+    })
+
+    test('shouldn\'t return positions of block that are below the board', () => {
+      // given
+      let figure = {
+        x: 0,
+        y: -1,
+        shape: [
+          [0, 1],
+          [1, 1],
+          [0, 1],
+        ]
+      }
+
+      const boardHeight = 1;
+      // when
+      let blockPositions = getFigureBlockPositionsInsideBoard(figure, boardHeight)
+      // then
+      expect(blockPositions).toEqual(expect.arrayContaining([
+        { x: 0, y: 0 }, { x: 1, y: 0 },
+      ]));
+      expect(blockPositions.length).toEqual(2);
     })
   })
 
@@ -454,5 +479,105 @@ describe("utils", () => {
       { x: 2, y: 4 },
     ]));
     expect(rotatedBlockPositions.length).toEqual(4);
+  })
+
+  describe('canFigureBeRotatedAsNewFigure', () => {
+    // given
+    const boardRows = [
+      ['', '', '', ''],
+      ['', '', '', ''],
+      ['', 'x', '', ''],
+      ['x', 'x', '', ''],
+    ]
+
+    const figureBase = {
+      rotable: true,
+      shape: [
+        [1, 0, 0],
+        [2, 1, 1],
+      ]
+    }
+
+    describe('should return true if figure can be rotated as new figure', () => {
+      // given
+      const newFigure = {
+        ...figureBase,
+        x: 0,
+        y: 0,
+      }
+
+      // when
+      const canBeRotated = canFigureBeRotatedAsNewFigure(newFigure, boardRows);
+
+      // then
+      expect(canBeRotated).toBe(true);
+    })
+
+    describe('should return false if figure cannot be rotated due to overlapping placed blocks', () => {
+      // given
+      const newFigure = {
+        ...figureBase,
+        x: 0,
+        y: 1,
+      }
+
+      // when
+      const canBeRotated = canFigureBeRotatedAsNewFigure(newFigure, boardRows);
+
+      // then
+      expect(canBeRotated).toBe(false);
+    })
+
+    describe('should return false if figure cannot be rotated due to being outside board\'s left border', () => {
+      // given
+      const newFigure = {
+        ...figureBase,
+        x: -1,
+        y: 0,
+      }
+
+      // when
+      const canBeRotated = canFigureBeRotatedAsNewFigure(newFigure, boardRows);
+
+      // then
+      expect(canBeRotated).toBe(false);
+    })
+
+    describe('should return false if figure cannot be rotated due to being outside board\'s right border', () => {
+      // given
+      const newFigure = {
+        ...figureBase,
+        x: 2,
+        y: 0,
+      }
+
+      // when
+      const canBeRotated = canFigureBeRotatedAsNewFigure(newFigure, boardRows);
+
+      // then
+      expect(canBeRotated).toBe(false);
+    })
+
+    describe('should return false if figure cannot be rotated due to being below the board', () => {
+      // given
+      const boardRows = [
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['', '', '', ''],
+      ]
+
+      const newFigure = {
+        ...figureBase,
+        x: 0,
+        y: 3,
+      }
+
+      // when
+      const canBeRotated = canFigureBeRotatedAsNewFigure(newFigure, boardRows);
+
+      // then
+      expect(canBeRotated).toBe(false);
+    })
   })
 });
