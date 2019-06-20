@@ -1,4 +1,4 @@
-import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFullRows, getHtmlTile, getSlammedFigure, isFigurePartiallyAboveBoard } from "../js/utils";
+import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFullRows, getHtmlTile, getRotatedBlockPositions, getSlammedFigure, isFigurePartiallyAboveBoard } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -23,6 +23,7 @@ describe("utils", () => {
         { y: 2, x: 2 }, { y: 2, x: 3 },
         { y: 3, x: 3 },
       ]));
+      expect(blockPositions.length).toBe(4);
     });
 
     test("should return block positions that are above the board", () => {
@@ -117,6 +118,7 @@ describe("utils", () => {
         { x: 0, y: 2 }, { x: 2, y: 2 },
         { x: 1, y: 3 }, { x: 2, y: 3 },
       ]));
+      expect(blockPositions.length).toBe(5)
     });
   });
 
@@ -402,10 +404,10 @@ describe("utils", () => {
       }
 
       // when
-      let actualCenter = getFigureCenter(figure);
+      let center = getFigureCenter(figure);
 
       // then
-      expect(actualCenter).toEqual({ x: 2, y: 3 })
+      expect(center).toEqual({ x: 2, y: 3 })
     })
 
     describe('should return null if figure is not rotable', () => {
@@ -421,10 +423,36 @@ describe("utils", () => {
       }
 
       // when
-      let actualCenter = getFigureCenter(figure);
+      const center = getFigureCenter(figure);
 
       // then
-      expect(actualCenter).toBe(null)
+      expect(center).toBe(null)
     })
+  })
+
+  describe('getRotatedBlockPositions should return block positions rotated by 90 degrees clockwise', () => {
+    // given
+    const centerPosition = {
+      x: 2,
+      y: 3
+    };
+
+    const blockPositions = [
+      { x: 1, y: 2 },
+      { x: 2, y: 2 },
+      { x: 2, y: 3 },
+      { x: 3, y: 3 },
+    ];
+
+    // when
+    const rotatedBlockPositions = getRotatedBlockPositions(centerPosition, blockPositions);
+
+    // then
+    expect(rotatedBlockPositions).toEqual(expect.arrayContaining([
+      { x: 3, y: 2 },
+      { x: 2, y: 3 }, { x: 3, y: 3 },
+      { x: 2, y: 4 },
+    ]));
+    expect(rotatedBlockPositions.length).toEqual(4);
   })
 });

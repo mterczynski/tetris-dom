@@ -103,3 +103,10 @@ export function getFigureCenter(figure) {
     y: relativeCenterPosition.y + figure.y,
   };
 }
+
+export function getRotatedBlockPositions(center, blockPositions) {
+  return blockPositions.map(block => ({
+    x: center.x + center.y - block.y,
+    y: center.y - center.x + block.x
+  }))
+}
