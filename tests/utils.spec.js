@@ -1,4 +1,4 @@
-import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFullRows, getHtmlTile, getSlammedFigure, isFigurePartiallyAboveBoard } from "../js/utils";
+import { canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFullRows, getHtmlTile, getSlammedFigure, isFigurePartiallyAboveBoard } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -384,6 +384,47 @@ describe("utils", () => {
 
       // then
       expect(result).toBe(false);
+    })
+  })
+
+  describe('getFigureCenter', () => {
+    describe('should return position of figure\' center if it exists', () => {
+      // given
+      const figure = {
+        x: 2,
+        y: 1,
+        shape: [
+          [1, 0],
+          [1, 0],
+          [2, 1],
+        ],
+        rotable: true,
+      }
+
+      // when
+      let actualCenter = getFigureCenter(figure);
+
+      // then
+      expect(actualCenter).toEqual({ x: 2, y: 3 })
+    })
+
+    describe('should return null if figure is not rotable', () => {
+      // given
+      const figure = {
+        x: 2,
+        y: 1,
+        shape: [
+          [0, 0],
+          [0, 0]
+        ],
+        rotable: false,
+      }
+
+      // when
+      let actualCenter = getFigureCenter(figure);
+
+      // then
+      expect(actualCenter).toBe(null)
     })
   })
 });

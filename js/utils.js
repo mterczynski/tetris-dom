@@ -65,7 +65,7 @@ export function getSlammedFigure(figure, boardRows) {
     slammedFigure.y++;
   }
 
-  return slammedFigure
+  return slammedFigure;
 }
 
 export function getFullRows(boardRows) {
@@ -79,9 +79,27 @@ export function getBoardAfterPoppingRows(indexesOfRowsToPop, boardRows) {
   return [
     ...Array(indexesOfRowsToPop.length).fill(Array(boardRows[0].length).fill('')),
     ...(boardRows.filter((boardRow, rowIndex) => !indexesOfRowsToPop.includes(rowIndex)))
-  ]
+  ];
 }
 
 export function isFigurePartiallyAboveBoard(figure) {
   return figure.y < 0;
+}
+
+export function getFigureCenter(figure) {
+  if (!figure.rotable) {
+    return null;
+  }
+
+  let relativeCenterPosition = figure.shape
+    .map(
+      (row, rowIndex) => ({ x: row.indexOf(2), y: rowIndex })
+    )
+    .filter(el => el.x !== -1)
+  [0];
+
+  return {
+    x: relativeCenterPosition.x + figure.x,
+    y: relativeCenterPosition.y + figure.y,
+  };
 }
