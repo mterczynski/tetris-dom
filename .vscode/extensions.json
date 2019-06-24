@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "orta.vscode-jest",
+    "coenraads.bracket-pair-colorizer",
+    "editorconfig.editorconfig",
+    "christian-kohler.path-intellisense"
+  ],
+  "unwantedRecommendations": []
+}
