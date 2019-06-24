@@ -125,7 +125,7 @@ describe("utils", () => {
   });
 
   describe('.getBlockPositionsFromBoardRows', () => {
-    describe('should return array of all block positions from board rows', () => {
+    test('should return array of all block positions from board rows', () => {
       // given
       let boardRows = [
         ['', '', ''],
@@ -167,7 +167,7 @@ describe("utils", () => {
       ],
     }
 
-    describe('should return true if figure can be translated by specified vector', () => {
+    test('should return true if figure can be translated by specified vector', () => {
       // given
       let vector = { x: 0, y: 1 };
 
@@ -178,7 +178,7 @@ describe("utils", () => {
       expect(result).toBe(true);
     });
 
-    describe('should return false if figure cannot be translated by specified vector due to fixed blocks blocking its way', () => {
+    test('should return false if figure cannot be translated by specified vector due to fixed blocks blocking its way', () => {
       // given
       let vector = { x: 1, y: 0 };
 
@@ -189,7 +189,7 @@ describe("utils", () => {
       expect(result).toBe(false);
     });
 
-    describe('should return false if figure cannot be translated by specified vector due to touching board bottom', () => {
+    test('should return false if figure cannot be translated by specified vector due to touching board bottom', () => {
       // given
       let vector = { x: 0, y: 2 };
 
@@ -200,7 +200,7 @@ describe("utils", () => {
       expect(result).toBe(false);
     });
 
-    describe('should return false if figure cannot be translated by specified vector due to being partially outside board\'s left border', () => {
+    test('should return false if figure cannot be translated by specified vector due to being partially outside board\'s left border', () => {
       // given
       let boardRows = [
         ['', '', '', ''],
@@ -220,7 +220,7 @@ describe("utils", () => {
 
     describe('should return false if figure cannot be translated by specified vector due to being partially outside board\'s right border', () => {
 
-      describe('when figure is fully inside board', () => {
+      test('when figure is fully inside board', () => {
         // given
         let vector = { x: 2, y: 0 }
 
@@ -231,7 +231,7 @@ describe("utils", () => {
         expect(result).toBe(false);
       })
 
-      describe('when figure is fully above board', () => {
+      test('when figure is fully above board', () => {
         // given
         let figure = {
           x: 2,
@@ -253,7 +253,7 @@ describe("utils", () => {
         expect(result).toBe(false);
       })
 
-      describe('when figure is partially above board', () => {
+      test('when figure is partially above board', () => {
         let figure = {
           x: 2,
           y: -2,
@@ -289,7 +289,7 @@ describe("utils", () => {
       ],
     }
 
-    describe('should return figure position after being slammed when board is empty', () => {
+    test('should return figure position after being slammed when board is empty', () => {
       // given
       let boardRows = [
         ['', '', ''],
@@ -310,7 +310,7 @@ describe("utils", () => {
       });
     })
 
-    describe('should return figure position after being slammed when it lands on blocks', () => {
+    test('should return figure position after being slammed when it lands on blocks', () => {
       // given
       let boardRows = [
         ['', '', ''],
@@ -332,7 +332,7 @@ describe("utils", () => {
     })
   })
 
-  describe('getFullRows should return indexes of all full rows', () => {
+  test('getFullRows should return indexes of all full rows', () => {
     // given
     let boardRows = [
       ['', '', '', 'x', ''],
@@ -349,7 +349,7 @@ describe("utils", () => {
     expect(fullRowsIndexes).toEqual([2, 4]);
   })
 
-  describe('getBoardAfterPoppingRows', () => {
+  test('getBoardAfterPoppingRows', () => {
     // given
     let boardRows = [
       ['', '', '', 'x', ''],
@@ -377,7 +377,7 @@ describe("utils", () => {
   })
 
   describe('isFigurePartiallyAboveBoard', () => {
-    describe('should return true if figure is partially above board', () => {
+    test('should return true if figure is partially above board', () => {
       // given
       const figure = {
         x: 0,
@@ -395,7 +395,7 @@ describe("utils", () => {
       expect(result).toBe(true);
     })
 
-    describe('should return false if figure is not partially or fully above board', () => {
+    test('should return false if figure is not partially or fully above board', () => {
       // given
       const figure = {
         x: 0,
@@ -415,7 +415,7 @@ describe("utils", () => {
   })
 
   describe('getFigureCenter', () => {
-    describe('should return position of figure\' center if it exists', () => {
+    test('should return position of figure\' center if it exists', () => {
       // given
       const figure = {
         x: 2,
@@ -435,7 +435,7 @@ describe("utils", () => {
       expect(center).toEqual({ x: 2, y: 3 })
     })
 
-    describe('should return null if figure is not rotable', () => {
+    test('should return null if figure is not rotable', () => {
       // given
       const figure = {
         x: 2,
@@ -455,7 +455,7 @@ describe("utils", () => {
     })
   })
 
-  describe('getRotatedBlockPositions should return block positions rotated by 90 degrees clockwise', () => {
+  test('getRotatedBlockPositions should return block positions rotated by 90 degrees clockwise', () => {
     // given
     const centerPosition = {
       x: 2,
@@ -498,7 +498,7 @@ describe("utils", () => {
       ]
     }
 
-    describe('should return true if figure can be rotated as new figure', () => {
+    test('should return true if figure can be rotated as new figure', () => {
       // given
       const newFigure = {
         ...figureBase,
@@ -513,7 +513,7 @@ describe("utils", () => {
       expect(canBeRotated).toBe(true);
     })
 
-    describe('should return false if figure cannot be rotated due to overlapping placed blocks', () => {
+    test('should return false if figure cannot be rotated due to overlapping placed blocks', () => {
       // given
       const newFigure = {
         ...figureBase,
@@ -528,7 +528,7 @@ describe("utils", () => {
       expect(canBeRotated).toBe(false);
     })
 
-    describe('should return false if figure cannot be rotated due to being outside board\'s left border', () => {
+    test('should return false if figure cannot be rotated due to being outside board\'s left border', () => {
       // given
       const newFigure = {
         ...figureBase,
@@ -543,7 +543,7 @@ describe("utils", () => {
       expect(canBeRotated).toBe(false);
     })
 
-    describe('should return false if figure cannot be rotated due to being outside board\'s right border', () => {
+    test('should return false if figure cannot be rotated due to being outside board\'s right border', () => {
       // given
       const newFigure = {
         ...figureBase,
@@ -558,7 +558,7 @@ describe("utils", () => {
       expect(canBeRotated).toBe(false);
     })
 
-    describe('should return false if figure cannot be rotated due to being below the board', () => {
+    test('should return false if figure cannot be rotated due to being below the board', () => {
       // given
       const boardRows = [
         ['', '', '', ''],
