@@ -1,4 +1,4 @@
-import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFullRows, getHtmlTile, getRotatedBlockPositions, getSlammedFigure, isFigurePartiallyAboveBoard } from "../js/utils";
+import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureAfterRotation, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFullRows, getHtmlTile, getRotatedBlockPositions, getSlammedFigure, getTypedBlockPositions, isFigurePartiallyAboveBoard } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -568,6 +568,61 @@ describe("utils", () => {
 
       // then
       expect(canBeRotated).toBe(false);
+    })
+  })
+
+  describe('getFigureAfterRotation', () => {
+    test('should return figure after rotation without checking if the figure is outside allowed boundaries', () => {
+      // given
+      const figure = {
+        x: 0,
+        y: 0,
+        className: 'figure-z',
+        shape: [
+          [1, 1, 0],
+          [0, 2, 1],
+        ],
+        rotable: true,
+      };
+
+      // when
+      const result = getFigureAfterRotation(figure);
+
+      // then
+      expect(result).toEqual({
+        x: 1,
+        y: 0,
+        className: 'figure-z',
+        shape: [
+          [0, 1],
+          [2, 1],
+          [1, 0],
+        ],
+        rotable: true,
+      })
+    })
+  })
+
+  describe('getTypedBlockPositions', () => {
+    test('should return blockPositions with extra blockType attribute(with value 1 or 2)', () => {
+      // given
+      const blockPositions = [
+        { x: 2, y: 0 },
+        { x: 1, y: 1 }, { x: 2, y: 1 },
+        { x: 1, y: 2 },
+      ];
+
+      const center = { x: 1, y: 1 };
+
+      // when
+      const result = getTypedBlockPositions(blockPositions, center);
+
+      // then
+      expect(result).toEqual([
+        { x: 2, y: 0, blockType: 1 },
+        { x: 1, y: 1, blockType: 2 }, { x: 2, y: 1, blockType: 1 },
+        { x: 1, y: 2, blockType: 1 },
+      ])
     })
   })
 });

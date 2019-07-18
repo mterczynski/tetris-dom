@@ -66,6 +66,7 @@ function initKeyEventListener() {
       slamCurrentFigure();
     } else if (["ArrowUp", "w", "W"].includes(key)) {
       // todo - rotate figure
+      rotateFigure(currentFigure, boardRows);
     }
   });
 }
@@ -101,3 +102,39 @@ export function main() {
   initKeyEventListener();
   restartGame();
 }
+
+// quick prototyping
+
+
+function rotateFigure(figure, boardRows) {
+  if (!figure.rotable) {
+    return;
+  }
+
+  // const rotatedFigure = getRotatedFigure(figure);
+
+  // if (isFigureOutsideAllowedBoundaries(figure)) {
+  //   return;
+  // }
+
+  // if (isFigureOverlappingPlacedBlocks(figure, boardRows)) {
+  //   return;
+  // }
+
+  // currentFigure = rotatedFigure;
+}
+
+// // helpers:
+
+// function getRotatedFigure(figure) {
+//   // todo
+//   return figure
+// }
+
+// function isFigureOutsideAllowedBoundaries(figure) {
+//   // todo
+// }
+
+// function isFigureOverlappingPlacedBlocks(figure, boardRows) {
+//   // todo
+// }
