@@ -19,8 +19,8 @@ export function getFigureBlockPositions({ x, y, shape }) {
     .reduce((acc, nextRow) => acc.concat(nextRow), [])
 }
 
-export function getFigureBlockPositionsInsideBoard(figure, boardHeight) {
-  return getFigureBlockPositions(figure)
+export function getFigureBlockPositionsInsideBoard(figureBlockPositions, boardHeight) {
+  return figureBlockPositions
     .filter(block => block.y >= 0)
     .filter(block => block.y < boardHeight)
 }
@@ -93,9 +93,7 @@ export function getFigureCenter(figure) {
   }
 
   let relativeCenterPosition = figure.shape
-    .map(
-      (row, rowIndex) => ({ x: row.indexOf(2), y: rowIndex })
-    )
+    .map((row, rowIndex) => ({ x: row.indexOf(2), y: rowIndex }))
     .filter(el => el.x !== -1)
   [0];
 
@@ -125,5 +123,5 @@ export function canFigureBeRotatedAsNewFigure(newFigure, boardRows) {
     return false;
   }
 
-  return !getFigureBlockPositionsInsideBoard(newFigure, boardRows.length).some(block => boardRows[block.y][block.x]);
+  return !getFigureBlockPositionsInsideBoard(allFigureBlocks, boardRows.length).some(block => boardRows[block.y][block.x]);
 }

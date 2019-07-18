@@ -52,22 +52,20 @@ describe("utils", () => {
   });
 
   describe('getFigureBlockPositionsInsideBoard', () => {
+    // given
+    const figureBlockPositions = [
+      { x: 1, y: -1 },
+      { x: 0, y: 0 }, { x: 1, y: 0 },
+      { x: 1, y: 1 },
+    ];
+
     test('should return only these block positions of provided figure that are inside the board', () => {
       // given
-      let figure = {
-        x: 0,
-        y: -1,
-        shape: [
-          [0, 1],
-          [1, 1],
-          [0, 1],
-        ]
-      }
-
       const boardHeight = 10;
 
       // when
-      let blockPositions = getFigureBlockPositionsInsideBoard(figure, boardHeight)
+      let blockPositions = getFigureBlockPositionsInsideBoard(figureBlockPositions, boardHeight);
+
       // then
       expect(blockPositions).toEqual(expect.arrayContaining([
         { x: 0, y: 0 }, { x: 1, y: 0 },
@@ -78,19 +76,11 @@ describe("utils", () => {
 
     test('shouldn\'t return positions of block that are below the board', () => {
       // given
-      let figure = {
-        x: 0,
-        y: -1,
-        shape: [
-          [0, 1],
-          [1, 1],
-          [0, 1],
-        ]
-      }
-
       const boardHeight = 1;
+
       // when
-      let blockPositions = getFigureBlockPositionsInsideBoard(figure, boardHeight)
+      let blockPositions = getFigureBlockPositionsInsideBoard(figureBlockPositions, boardHeight);
+
       // then
       expect(blockPositions).toEqual(expect.arrayContaining([
         { x: 0, y: 0 }, { x: 1, y: 0 },
