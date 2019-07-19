@@ -1,4 +1,4 @@
-import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureAfterRotation, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFullRows, getHtmlTile, getRotatedBlockPositions, getSlammedFigure, getTypedBlockPositions, isFigurePartiallyAboveBoard } from "../js/utils";
+import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureAfterRotation, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFigureFromTypedBlockPositions, getFullRows, getHtmlTile, getRotatedBlockPositions, getSlammedFigure, getTypedBlockPositions, isFigurePartiallyAboveBoard } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -623,6 +623,31 @@ describe("utils", () => {
         { x: 1, y: 1, blockType: 2 }, { x: 2, y: 1, blockType: 1 },
         { x: 1, y: 2, blockType: 1 },
       ])
+    })
+  })
+
+  describe('getFigureFromTypedBlockPositions', () => {
+    test('should return figure from typedBlockPositions', () => {
+      // given
+      const typedBlockPositions = [
+        { x: 2, y: 0, blockType: 1 },
+        { x: 1, y: 1, blockType: 2 }, { x: 2, y: 1, blockType: 1 },
+        { x: 1, y: 2, blockType: 1 },
+      ];
+
+      // when
+      const result = getFigureFromTypedBlockPositions(typedBlockPositions);
+
+      // then
+      expect(result).toEqual({
+        x: 1,
+        y: 0,
+        shape: [
+          [0, 1],
+          [2, 1],
+          [1, 0],
+        ]
+      })
     })
   })
 });
