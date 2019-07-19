@@ -136,15 +136,12 @@ export function getFigureAfterRotation(figure) {
   const blockPositions = getFigureBlockPositions(figure);
   const rotatedBlockPositions = getRotatedBlockPositions(center, blockPositions);
   const typedBlockPositions = getTypedBlockPositions(rotatedBlockPositions, center);
-
-  // todo
+  const rotatedFigure = getFigureFromTypedBlockPositions(typedBlockPositions);
 
   return {
     ...figure,
-    x: newFigureX,
-    y: newFigureY,
-    shape: newFigureShape,
-  }
+    ...rotatedFigure,
+  };
 }
 
 export function getTypedBlockPositions(blockPositions, center) {
