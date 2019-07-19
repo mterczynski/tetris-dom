@@ -143,7 +143,7 @@ export function getFigureAfterRotation(figure) {
     ...figure,
     x: newFigureX,
     y: newFigureY,
-    shape: newFigureShape
+    shape: newFigureShape,
   }
 }
 
@@ -151,40 +151,12 @@ export function getTypedBlockPositions(blockPositions, center) {
   const typedBlockPositions = blockPositions.map(block => ({ ...block, blockType: 1 }));
   typedBlockPositions.find(block => block.x === center.x && block.y === center.y).blockType = 2;
 
-  return typedBlockPositions
+  return typedBlockPositions;
 }
 
-export function getFigureFromTypedBlockPositions(typedBlockPositions) {
-  // todo - break this function to two functions:
-
-  // 1. return
-  /*
-    {
-      x: 0,
-      y: 0,
-      shape: [
-        [0, 0],
-        [0, 0],
-        [0, 0],
-      ],
-    }
-  */
-
-  // 2. return
-  /*
-    {
-      x: 0,
-      y: 0,
-      shape: [
-        [0, 1],
-        [2, 1],
-        [1, 0],
-      ],
-    }
-  */
-
-  const blockPositionsSortedByX = [...typedBlockPositions].sort((block, nextBlock) => block.x - nextBlock.x);
-  const blockPositionsSortedByY = [...typedBlockPositions].sort((block, nextBlock) => block.y - nextBlock.y);
+export function getFigureWithEmptyShape(blockPositions) {
+  const blockPositionsSortedByX = [...blockPositions].sort((block, nextBlock) => block.x - nextBlock.x);
+  const blockPositionsSortedByY = [...blockPositions].sort((block, nextBlock) => block.y - nextBlock.y);
 
   const minX = blockPositionsSortedByX[0].x;
   const minY = blockPositionsSortedByY[0].y;
@@ -192,13 +164,21 @@ export function getFigureFromTypedBlockPositions(typedBlockPositions) {
   const shape = [...(Array(blockPositionsSortedByY.slice(-1)[0].y - minY + 1))]
     .map(() => Array(blockPositionsSortedByX.slice(-1)[0].x - minX + 1).fill(0));
 
-  typedBlockPositions.forEach(block => {
-    shape[block.y - minY][block.x - minX] = block.blockType
-  });
-
   return {
     x: minX,
     y: minY,
-    shape
-  }
+    shape,
+  };
+}
+
+export function getFigureFromTypedBlockPositions(typedBlockPositions) {
+  const figure = { ...getFigureWithEmptyShape(typedBlockPositions) };
+
+  figure.shape = [...figure.shape];
+
+  typedBlockPositions.forEach(block =>
+    figure.shape[block.y - figure.y][block.x - figure.x] = block.blockType
+  );
+
+  return figure;
 }
