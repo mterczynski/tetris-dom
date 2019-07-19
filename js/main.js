@@ -111,7 +111,7 @@ function rotateFigure(figure, boardRows) {
     return;
   }
 
-  // const rotatedFigure = getRotatedFigure(figure);
+  const rotatedFigure = getRotatedFigure(figure);
 
   // if (isFigureOutsideAllowedBoundaries(figure)) {
   //   return;

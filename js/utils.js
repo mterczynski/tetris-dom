@@ -131,7 +131,7 @@ export function canFigureBeRotatedAsNewFigure(newFigure, boardRows) {
 
 // new rotation-related functions
 
-export function getFigureAfterRotation(figure) {
+export function getRotatedFigure(figure) {
   const center = getFigureCenter(figure);
   const blockPositions = getFigureBlockPositions(figure);
   const rotatedBlockPositions = getRotatedBlockPositions(center, blockPositions);

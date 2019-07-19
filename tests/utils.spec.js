@@ -1,4 +1,4 @@
-import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureAfterRotation, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFigureFromTypedBlockPositions, getFigureWithEmptyShape, getFullRows, getHtmlTile, getRotatedBlockPositions, getSlammedFigure, getTypedBlockPositions, isFigurePartiallyAboveBoard } from "../js/utils";
+import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFigureFromTypedBlockPositions, getFigureWithEmptyShape, getFullRows, getHtmlTile, getRotatedBlockPositions, getRotatedFigure, getSlammedFigure, getTypedBlockPositions, isFigurePartiallyAboveBoard } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -571,7 +571,7 @@ describe("utils", () => {
     })
   })
 
-  describe('getFigureAfterRotation', () => {
+  describe('getRotatedFigure', () => {
     test('should return figure after rotation without checking if the figure is outside allowed boundaries', () => {
       // given
       const figure = {
@@ -586,7 +586,7 @@ describe("utils", () => {
       };
 
       // when
-      const result = getFigureAfterRotation(figure);
+      const result = getRotatedFigure(figure);
 
       // then
       expect(result).toEqual({
