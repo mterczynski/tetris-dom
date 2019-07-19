@@ -1,3 +1,4 @@
+
 export function getHtmlTile(position) {
   return document.querySelector(`.row:nth-child(${position.y + 1}) .tile:nth-child(${position.x + 1})`);
 }
@@ -147,5 +148,8 @@ export function getFigureAfterRotation(figure) {
 }
 
 export function getTypedBlockPositions(blockPositions, center) {
-  // todo
+  const typedBlockPositions = blockPositions.map(block => ({ ...block, blockType: 1 }));
+  typedBlockPositions.find(block => block.x === center.x && block.y === center.y).blockType = 2;
+
+  return typedBlockPositions
 }
