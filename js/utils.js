@@ -88,8 +88,6 @@ export function isFigurePartiallyAboveBoard(figure) {
   return figure.y < 0;
 }
 
-// original rotation-related functions
-
 export function getFigureCenter(figure) {
   if (!figure.rotable) {
     return null;
@@ -128,8 +126,6 @@ export function canFigureBeRotatedAsNewFigure(newFigure, boardRows) {
 
   return !getFigureBlockPositionsInsideBoard(allFigureBlocks, boardRows.length).some(block => boardRows[block.y][block.x]);
 }
-
-// new rotation-related functions
 
 export function getRotatedFigure(figure) {
   const center = getFigureCenter(figure);
