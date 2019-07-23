@@ -1,6 +1,6 @@
 import { figures } from "./figures.js";
 import { renderer } from "./renderer.js";
-import { canTranslateFigureByVector, getBoardAfterPoppingRows, getFigureBlockPositions, getFullRows, getSlammedFigure, isFigurePartiallyAboveBoard } from "./utils.js";
+import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBoardAfterPoppingRows, getFigureBlockPositions, getFullRows, getRotatedFigure, getSlammedFigure, isFigurePartiallyAboveBoard } from "./utils.js";
 
 const boardWidth = 10;
 const boardHeight = 15;
@@ -23,8 +23,9 @@ function getRandomFigure() {
   return {
     shape: [...figure.shape],
     className: figure.className,
+    rotable: figure.rotable,
     y: figure.y,
-    x: Math.floor(boardWidth / 2 - figure.shape[0].length / 2)
+    x: Math.floor(boardWidth / 2 - figure.shape[0].length / 2),
   };
 }
 
@@ -36,6 +37,7 @@ function moveCurrentFigureByVectorIfPossible(vector, boardRows) {
       y: currentFigure.y + vector.y,
     }
   }
+
   renderer.render(boardRows, currentFigure);
 }
 
@@ -65,7 +67,7 @@ function initKeyEventListener() {
     } else if (["ArrowDown", "s", "S"].includes(key)) {
       slamCurrentFigure();
     } else if (["ArrowUp", "w", "W"].includes(key)) {
-      // todo - rotate figure
+      rotateFigure(currentFigure, boardRows);
     }
   });
 }
@@ -93,6 +95,22 @@ function tick() {
 
 function gameLoop() {
   tick();
+  renderer.render(boardRows, currentFigure);
+}
+
+function rotateFigure(figure, boardRows) {
+  if (!figure.rotable) {
+    return;
+  }
+
+  const rotatedFigure = getRotatedFigure(figure);
+
+  if (!canFigureBeRotatedAsNewFigure(rotatedFigure, boardRows)) {
+    return;
+  }
+
+  currentFigure = rotatedFigure;
+
   renderer.render(boardRows, currentFigure);
 }
 
