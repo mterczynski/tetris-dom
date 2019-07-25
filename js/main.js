@@ -1,6 +1,15 @@
 import { figures } from "./figures.js";
 import { renderer } from "./renderer.js";
-import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBoardAfterPoppingRows, getFigureBlockPositions, getFullRows, getRotatedFigure, getSlammedFigure, isFigurePartiallyAboveBoard } from "./utils.js";
+import {
+  canFigureBeRotatedAsNewFigure,
+  canTranslateFigureByVector,
+  getBoardAfterPoppingRows,
+  getFigureBlockPositions,
+  getFullRows,
+  getRotatedFigure,
+  getSlammedFigure,
+  isFigurePartiallyAboveBoard
+} from "./utils.js";
 
 const boardWidth = 10;
 const boardHeight = 15;
@@ -25,7 +34,7 @@ function getRandomFigure() {
     className: figure.className,
     rotable: figure.rotable,
     y: figure.y,
-    x: Math.floor(boardWidth / 2 - figure.shape[0].length / 2),
+    x: Math.floor(boardWidth / 2 - figure.shape[0].length / 2)
   };
 }
 
@@ -34,17 +43,36 @@ function moveCurrentFigureByVectorIfPossible(vector, boardRows) {
     currentFigure = {
       ...currentFigure,
       x: currentFigure.x + vector.x,
-      y: currentFigure.y + vector.y,
-    }
+      y: currentFigure.y + vector.y
+    };
   }
 
   renderer.render(boardRows, currentFigure);
 }
 
 function placeFigureInBoard(figure, boardRows) {
-  getFigureBlockPositions(figure).forEach(({ x, y }) => {
+  let oldBoardRows = JSON.parse(JSON.stringify(boardRows));
+
+  const figureBlockPositions = getFigureBlockPositions(figure); // ok
+
+  figureBlockPositions.forEach(({ x, y }) => {
     boardRows[y][x] = figure.className;
   });
+
+  let newBoardRows = JSON.parse(JSON.stringify(boardRows));
+
+  function getAmountOfBlocksInBoard(boardRows) {
+    return boardRows
+      .map(row => row.filter(Boolean).length)
+      .reduce((acc, next) => acc + next, 0);
+  }
+
+  const oldAmountOfBlocks = getAmountOfBlocksInBoard(oldBoardRows);
+  const newAmountOfBlocks = getAmountOfBlocksInBoard(newBoardRows);
+
+  if (newAmountOfBlocks - 4 > oldAmountOfBlocks) {
+    debugger;
+  }
 
   currentFigure = getRandomFigure();
   renderer.render(boardRows, currentFigure);
@@ -82,11 +110,11 @@ function tick() {
   if (canTranslateFigureByVector(currentFigure, { x: 0, y: 1 }, boardRows)) {
     currentFigure = {
       ...currentFigure,
-      y: currentFigure.y + 1,
+      y: currentFigure.y + 1
     };
   } else if (isFigurePartiallyAboveBoard(currentFigure)) {
     // todo - game over
-    console.log('game over')
+    console.log("game over");
   } else {
     placeFigureInBoard(currentFigure, boardRows);
     popFullRows();

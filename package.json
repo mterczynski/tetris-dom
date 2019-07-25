@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "test:cov": "jest --coverage",
-    "start": "http-server -p 3000"
+    "start": "http-server -p 4000"
   },
   "repository": {
     "type": "git",
