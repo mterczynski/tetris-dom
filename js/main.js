@@ -1,15 +1,6 @@
 import { figures } from "./figures.js";
 import { renderer } from "./renderer.js";
-import {
-  canFigureBeRotatedAsNewFigure,
-  canTranslateFigureByVector,
-  getBoardAfterPoppingRows,
-  getFigureBlockPositions,
-  getFullRows,
-  getRotatedFigure,
-  getSlammedFigure,
-  isFigurePartiallyAboveBoard
-} from "./utils.js";
+import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBoardAfterPoppingRows, getFigureBlockPositions, getFullRows, getRotatedFigure, getSlammedFigure, isFigurePartiallyAboveBoard } from "./utils.js";
 
 const boardWidth = 10;
 const boardHeight = 15;
@@ -56,7 +47,9 @@ function placeFigureInBoard(figure, boardRows) {
   const figureBlockPositions = getFigureBlockPositions(figure); // ok
 
   figureBlockPositions.forEach(({ x, y }) => {
+    let oldBoard = JSON.parse(JSON.stringify(boardRows))
     boardRows[y][x] = figure.className;
+    console.log({ x, y, boardBeforeUpdate: oldBoard, boardAfterUpdate: JSON.parse(JSON.stringify(boardRows)) })
   });
 
   let newBoardRows = JSON.parse(JSON.stringify(boardRows));
