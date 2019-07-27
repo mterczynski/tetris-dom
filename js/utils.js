@@ -30,7 +30,7 @@ export function getBlockPositionsFromBoardRows(boardRows) {
   return getFigureBlockPositions({
     x: 0,
     y: 0,
-    shape: JSON.parse(JSON.stringify(boardRows))
+    shape: JSON.parse(JSON.stringify(boardRows)),
   });
 }
 
@@ -143,7 +143,7 @@ export function getRotatedFigure(figure) {
 export function getTypedBlockPositions(blockPositions, center) {
   const typedBlockPositions = blockPositions.map(block => ({
     ...(JSON.parse(JSON.stringify(block))),
-    blockType: 1
+    blockType: 1,
   }));
   typedBlockPositions.find(block => block.x === center.x && block.y === center.y).blockType = 2;
 

@@ -42,9 +42,7 @@ function moveCurrentFigureByVectorIfPossible(vector, boardRows) {
 }
 
 function placeFigureInBoard(figure, boardRows) {
-  const figureBlockPositions = getFigureBlockPositions(figure);
-
-  figureBlockPositions.forEach(({ x, y }) => {
+  getFigureBlockPositions(figure).forEach(({ x, y }) => {
     boardRows[y][x] = figure.className;
   });
 
@@ -84,7 +82,7 @@ function tick() {
   if (canTranslateFigureByVector(currentFigure, { x: 0, y: 1 }, boardRows)) {
     currentFigure = {
       ...currentFigure,
-      y: currentFigure.y + 1
+      y: currentFigure.y + 1,
     };
   } else if (isFigurePartiallyAboveBoard(currentFigure)) {
     // todo - game over
