@@ -6,9 +6,7 @@ const boardWidth = 10;
 const boardHeight = 15;
 
 let boardRows = getNewBoardRows();
-// let boardRows = [["", "", "", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", ""], ["", "", "", "", "", "", "", "", "", ""], ["", "", "figure-l", "figure-l", "", "", "", "", "", ""], ["", "figure-j", "figure-j", "figure-l", "", "figure-square", "figure-square", "figure-j", "figure-j", "figure-j"], ["figure-line", "figure-j", "", "figure-l", "", "figure-square", "figure-square", "figure-square", "figure-square", "figure-j"], ["figure-line", "figure-j", "figure-z", "", "figure-z", "figure-z", "figure-z", "figure-square", "figure-square", "figure-line"], ["figure-line", "figure-z", "figure-s", "figure-z", "figure-pyramid", "figure-pyramid", "figure-l", "", "figure-j", "figure-line"], ["figure-j", "figure-s", "", "figure-s", "figure-s", "figure-s", "figure-l", "figure-l", "figure-square", "figure-square"], ["", "figure-pyramid", "figure-s", "figure-j", "figure-z", "figure-z", "figure-square", "figure-square", "", "figure-line"], ["figure-pyramid", "figure-pyramid", "figure-s", "figure-j", "figure-j", "figure-j", "figure-square", "figure-square", "", "figure-line"], ["figure-line", "figure-pyramid", "figure-line", "", "figure-s", "figure-s", "figure-s", "figure-z", "figure-square", "figure-square"], ["figure-l", "figure-l", "figure-l", "figure-j", "figure-j", "figure-square", "figure-square", "figure-l", "", "figure-l"]]
 let currentFigure = getRandomFigure();
-// let currentFigure = { "shape": [[1, 1], [1, 1]], "className": "figure-square", "rotable": false, "y": 4, "x": 8 };
 
 function getNewBoardRows() {
   return [...Array(boardHeight)].map(() => Array(boardWidth).fill(""));
@@ -17,7 +15,6 @@ function getNewBoardRows() {
 function restartGame() {
   renderer.recreateBoard({ width: boardWidth, height: boardHeight });
   currentFigure = getRandomFigure();
-  // currentFigure = { "shape": [[1, 1], [1, 1]], "className": "figure-square", "rotable": false, "y": 0, "x": 8 };
 }
 
 function getRandomFigure() {
@@ -45,42 +42,14 @@ function moveCurrentFigureByVectorIfPossible(vector, boardRows) {
 }
 
 function placeFigureInBoard(figure, boardRows) {
-  console.group();
-  let oldBoardRows = JSON.parse(JSON.stringify(boardRows));
+  const figureBlockPositions = getFigureBlockPositions(figure);
 
-  const figureBlockPositions = getFigureBlockPositions(figure); // ok
-
-  figureBlockPositions.forEach((el, i, arr) => {
-    let oldBoard = JSON.parse(JSON.stringify(boardRows))
-    boardRows[el.y][el.x] = figure.className;
-    console.log({
-      el: JSON.parse(JSON.stringify(el)),
-      boardBeforeUpdate: oldBoard,
-      boardAfterUpdate: JSON.parse(JSON.stringify(boardRows)),
-      arr: JSON.parse(JSON.stringify(arr)),
-      i: i,
-    });
+  figureBlockPositions.forEach(({ x, y }) => {
+    boardRows[y][x] = figure.className;
   });
-
-  let newBoardRows = JSON.parse(JSON.stringify(boardRows));
-
-  function getAmountOfBlocksInBoard(boardRows) {
-    return boardRows
-      .map(row => row.filter(Boolean).length)
-      .reduce((acc, next) => acc + next, 0);
-  }
-
-  const oldAmountOfBlocks = getAmountOfBlocksInBoard(oldBoardRows);
-  const newAmountOfBlocks = getAmountOfBlocksInBoard(newBoardRows);
-
-  if (newAmountOfBlocks - 4 > oldAmountOfBlocks) {
-    debugger;
-  }
 
   currentFigure = getRandomFigure();
   renderer.render(boardRows, currentFigure);
-  console.groupEnd();
-  console.log('===== Figure placed ====')
 }
 
 function slamCurrentFigure() {
