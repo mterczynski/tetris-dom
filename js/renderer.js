@@ -28,7 +28,7 @@ function drawCurrentFigure(currentFigure, boardHeight) {
 }
 
 export const renderer = {
-  render(boardRows, currentFigure) {
+  renderBoardAndCurrentFigure(boardRows, currentFigure) {
     clearBoard();
     drawBlocks(boardRows);
     drawCurrentFigure(currentFigure, boardRows.length);

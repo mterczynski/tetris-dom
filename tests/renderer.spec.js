@@ -52,7 +52,7 @@ describe("renderer", () => {
     );
   });
 
-  test(".render(boardRows, currentFigure) should clear board, draw current figure and blocks from boardRows", () => {
+  test(".renderBoardAndCurrentFigure(boardRows, currentFigure) should clear board, draw current figure and blocks from boardRows", () => {
     // given
     const boardRows = [
       [null, null, null],
@@ -91,7 +91,7 @@ describe("renderer", () => {
     </div>`.replace(/>\s+</g, "><");
 
     // when
-    renderer.render(boardRows, currentFigure);
+    renderer.renderBoardAndCurrentFigure(boardRows, currentFigure);
 
     // then
     const expectedBoard = document.createElement("div");

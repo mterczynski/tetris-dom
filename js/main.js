@@ -5,6 +5,9 @@ import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBoardAfte
 const boardWidth = 10;
 const boardHeight = 15;
 
+let score = 0;
+let bestScore = localStorage.getItem('bestScore') || 0;
+
 let boardRows = getNewBoardRows();
 let currentFigure = getRandomFigure();
 
@@ -14,6 +17,8 @@ function getNewBoardRows() {
 
 function restartGame() {
   renderer.recreateBoard({ width: boardWidth, height: boardHeight });
+  renderer.renderScore(score);
+  renderer.renderBestScore(bestScore);
   currentFigure = getRandomFigure();
 }
 
@@ -38,7 +43,7 @@ function moveCurrentFigureByVectorIfPossible(vector, boardRows) {
     };
   }
 
-  renderer.render(boardRows, currentFigure);
+  renderer.renderBoardAndCurrentFigure(boardRows, currentFigure);
 }
 
 function placeFigureInBoard(figure, boardRows) {
@@ -47,14 +52,14 @@ function placeFigureInBoard(figure, boardRows) {
   });
 
   currentFigure = getRandomFigure();
-  renderer.render(boardRows, currentFigure);
+  renderer.renderBoardAndCurrentFigure(boardRows, currentFigure);
 }
 
 function slamCurrentFigure() {
   currentFigure = getSlammedFigure(currentFigure, boardRows);
   placeFigureInBoard(currentFigure, boardRows);
   popFullRows();
-  renderer.render(boardRows, currentFigure);
+  renderer.renderBoardAndCurrentFigure(boardRows, currentFigure);
 }
 
 function initKeyEventListener() {
@@ -74,8 +79,12 @@ function initKeyEventListener() {
 
 function popFullRows() {
   const fullRows = getFullRows(boardRows);
-  // todo - add score
   boardRows = getBoardAfterPoppingRows(fullRows, boardRows);
+  score += fullRows.length;
+  bestScore = Math.max(bestScore, score);
+  localStorage.setItem('bestScore', bestScore);
+  renderer.renderScore(score);
+  renderer.renderBestScore(bestScore);
 }
 
 function tick() {
@@ -95,7 +104,7 @@ function tick() {
 
 function gameLoop() {
   tick();
-  renderer.render(boardRows, currentFigure);
+  renderer.renderBoardAndCurrentFigure(boardRows, currentFigure);
 }
 
 function rotateFigure(figure, boardRows) {
@@ -111,7 +120,7 @@ function rotateFigure(figure, boardRows) {
 
   currentFigure = rotatedFigure;
 
-  renderer.render(boardRows, currentFigure);
+  renderer.renderBoardAndCurrentFigure(boardRows, currentFigure);
 }
 
 export function main() {
