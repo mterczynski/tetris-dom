@@ -59,4 +59,11 @@ export const figures = Object.freeze([
     ],
     rotable: true,
   },
-].map(figure => ({ ...figure, y: -figure.shape.length })));
+]
+  .map(figure => ({ ...figure, y: -figure.shape.length })));
+
+figures.forEach(figure => {
+  figure.shape.forEach(row => Object.freeze(row));
+  Object.freeze(figure.shape);
+  Object.freeze(figure);
+});

@@ -35,7 +35,7 @@ function moveCurrentFigureByVectorIfPossible(vector, boardRows) {
       ...currentFigure,
       x: currentFigure.x + vector.x,
       y: currentFigure.y + vector.y,
-    }
+    };
   }
 
   renderer.render(boardRows, currentFigure);
@@ -86,7 +86,7 @@ function tick() {
     };
   } else if (isFigurePartiallyAboveBoard(currentFigure)) {
     // todo - game over
-    console.log('game over')
+    console.log("game over");
   } else {
     placeFigureInBoard(currentFigure, boardRows);
     popFullRows();
