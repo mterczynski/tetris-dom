@@ -34,7 +34,7 @@ function moveCurrentFigureByVectorIfPossible(vector, boardRows) {
     currentFigure = {
       ...currentFigure,
       x: currentFigure.x + vector.x,
-      y: currentFigure.y + vector.y
+      y: currentFigure.y + vector.y,
     };
   }
 
