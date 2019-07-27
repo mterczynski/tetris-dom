@@ -25,7 +25,7 @@ function getRandomFigure() {
     className: figure.className,
     rotable: figure.rotable,
     y: figure.y,
-    x: Math.floor(boardWidth / 2 - figure.shape[0].length / 2)
+    x: Math.floor(boardWidth / 2 - figure.shape[0].length / 2),
   };
 }
 
