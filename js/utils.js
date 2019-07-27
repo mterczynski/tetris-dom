@@ -30,7 +30,7 @@ export function getBlockPositionsFromBoardRows(boardRows) {
   return getFigureBlockPositions({
     x: 0,
     y: 0,
-    shape: boardRows
+    shape: JSON.parse(JSON.stringify(boardRows))
   });
 }
 
@@ -60,7 +60,7 @@ export function canTranslateFigureByVector(figure, vector, boardRows) {
 export function getSlammedFigure(figure, boardRows) {
   let slammedFigure = {
     ...figure,
-    shape: [...figure.shape],
+    shape: JSON.parse(JSON.stringify(figure.shape)),
   }
 
   while (canTranslateFigureByVector(slammedFigure, { x: 0, y: 1 }, boardRows)) {
@@ -79,7 +79,7 @@ export function getFullRows(boardRows) {
 
 export function getBoardAfterPoppingRows(indexesOfRowsToPop, boardRows) {
   return [
-    ...Array(indexesOfRowsToPop.length).fill(Array(boardRows[0].length).fill('')),
+    ...[...Array(indexesOfRowsToPop.length)].map(() => Array(boardRows[0].length).fill('')),
     ...(boardRows.filter((boardRow, rowIndex) => !indexesOfRowsToPop.includes(rowIndex)))
   ];
 }
@@ -141,7 +141,10 @@ export function getRotatedFigure(figure) {
 }
 
 export function getTypedBlockPositions(blockPositions, center) {
-  const typedBlockPositions = blockPositions.map(block => ({ ...block, blockType: 1 }));
+  const typedBlockPositions = blockPositions.map(block => ({
+    ...(JSON.parse(JSON.stringify(block))),
+    blockType: 1
+  }));
   typedBlockPositions.find(block => block.x === center.x && block.y === center.y).blockType = 2;
 
   return typedBlockPositions;
@@ -167,7 +170,7 @@ export function getFigureWithEmptyShape(blockPositions) {
 export function getFigureFromTypedBlockPositions(typedBlockPositions) {
   const figure = { ...getFigureWithEmptyShape(typedBlockPositions) };
 
-  figure.shape = [...figure.shape];
+  figure.shape = JSON.parse(JSON.stringify(figure.shape));
 
   typedBlockPositions.forEach(block =>
     figure.shape[block.y - figure.y][block.x - figure.x] = block.blockType
