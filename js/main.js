@@ -16,10 +16,12 @@ function getNewBoardRows() {
 }
 
 function restartGame() {
-  renderer.recreateBoard({ width: boardWidth, height: boardHeight });
+  score = 0;
+  boardRows = getNewBoardRows();
+  currentFigure = getRandomFigure();
+  renderer.recreateBoardHtmlElement({ width: boardWidth, height: boardHeight });
   renderer.renderScore(score);
   renderer.renderBestScore(bestScore);
-  currentFigure = getRandomFigure();
 }
 
 function getRandomFigure() {
@@ -94,8 +96,8 @@ function tick() {
       y: currentFigure.y + 1,
     };
   } else if (isFigurePartiallyAboveBoard(currentFigure)) {
-    // todo - game over
-    console.log("game over");
+    alert(`Game over, your score: ${score}`);
+    restartGame();
   } else {
     placeFigureInBoard(currentFigure, boardRows);
     popFullRows();

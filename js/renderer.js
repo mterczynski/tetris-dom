@@ -34,7 +34,7 @@ export const renderer = {
     drawCurrentFigure(currentFigure, boardRows.length);
   },
 
-  recreateBoard({ width, height }) {
+  recreateBoardHtmlElement({ width, height }) {
     const boardHtmlElement = document.getElementById("board");
     boardHtmlElement.innerHTML = "";
 

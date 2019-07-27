@@ -27,7 +27,7 @@ describe("renderer", () => {
     expect(document.getElementById("best-score").innerHTML).toBe("123");
   });
 
-  test(".recreateBoard should clear old board and create new one", () => {
+  test(".recreateBoardHtmlElement should clear old board and create new one", () => {
     // given
     const newBoardDimensions = { width: 3, height: 5 };
 
@@ -38,7 +38,7 @@ describe("renderer", () => {
     </div>`.replace(/>\s+</g, "><");
 
     // when
-    renderer.recreateBoard(newBoardDimensions);
+    renderer.recreateBoardHtmlElement(newBoardDimensions);
 
     // then
     const expectedBoard = document.createElement("div");
