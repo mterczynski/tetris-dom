@@ -1,4 +1,4 @@
-https://travis-ci.org/mterczynski/tetris-dom.svg?branch=master
+[![Build Status](https://travis-ci.org/mterczynski/tetris-dom.svg?branch=master)]
 
 # Tetris
 
