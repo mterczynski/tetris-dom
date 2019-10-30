@@ -1,0 +1,9 @@
+language: node_js
+
+install:
+  - npm ci
+branches:
+  only:
+  	- master
+script:
+	- npm test
