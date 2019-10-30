@@ -1,3 +1,5 @@
+https://travis-ci.org/mterczynski/tetris-dom.svg?branch=master
+
 # Tetris
 
 ## Installation
