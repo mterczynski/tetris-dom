@@ -1,9 +1,9 @@
 language: node_js
 
 install:
-  - npm ci
+	- npm ci
 branches:
-  only:
-  	- master
+	only:
+		- master
 script:
 	- npm test
