@@ -1,4 +1,4 @@
-# Tetris ![Build Status](https://travis-ci.org/mterczynski/tetris-dom.svg?branch=master)
+# Tetris [![Build Status](https://travis-ci.org/mterczynski/tetris-dom.svg?branch=master)](https://travis-ci.org/mterczynski/tetris-dom)
 
 ## Installation
 
