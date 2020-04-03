@@ -1,7 +1,7 @@
 {
   "recommendations": [
     "orta.vscode-jest",
-    "coenraads.bracket-pair-colorizer",
+    "coenraads.bracket-pair-colorizer-2",
     "editorconfig.editorconfig",
     "christian-kohler.path-intellisense"
   ],
