@@ -2,10 +2,10 @@
 
 Steering: 
 
-W - rotate block
-A - move block to the right
-S - Place figure
-D - move block to the right
+W - rotate block  
+A - move block to the right  
+S - Place figure  
+D - move block to the right  
 
 
 ## Installation
