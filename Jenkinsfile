@@ -2,7 +2,7 @@ pipeline {
 	agent any
 
   environment {
-    DESTINATION = "root@mterczynski.pl:/var/www/html/tetris-dom"
+    DESTINATION = "root@mterczynski.pl:/var/www/html/tetris"
   }
 
 	options {
@@ -10,6 +10,14 @@ pipeline {
 	}
 
 	stages {
+    stage('Install') {
+			steps {
+				sh '''
+					yarn
+				'''
+			}
+		}
+
 		stage('Test') {
 			steps {
 				sh '''
