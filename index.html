@@ -18,11 +18,20 @@
       background: rgb(20, 20, 20);
     }
 
+    ul {
+      list-style-type: none;
+    }
+
+    .controls {
+      margin-right: 20px;
+    }
+
     #game-container {
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
+      display: flex;
     }
 
     #board {
@@ -48,18 +57,32 @@
 
 <body>
   <div id="game-container">
-    <div id="board"></div>
-    <div class="score-row">
-      <div>
-        <span>Score:</span>
-        <span id="score">0</span>
-      </div>
-      <div>
-        <span>Best score:</span>
-        <span id="best-score">0</span>
+    <div class="controls">
+      <h3>Controls:</h3>
+      <ul>
+        <li>W - rotate</li>
+        <li>A - move left</li>
+        <li>S - place block</li>
+        <li>D - move right</li>
+      </ul>
+    </div>
+
+    <div>
+      <div id="board"></div>
+
+      <div class="score-row">
+        <div>
+          <span>Score:</span>
+          <span id="score">0</span>
+        </div>
+        <div>
+          <span>Best score:</span>
+          <span id="best-score">0</span>
+        </div>
       </div>
     </div>
   </div>
+
 
   <script type="module">
     import { main } from "./js/main.js";
