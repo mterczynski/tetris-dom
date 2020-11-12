@@ -59,9 +59,14 @@ function placeFigureInBoard(figure, boardRows) {
 
 function slamCurrentFigure() {
   currentFigure = getSlammedFigure(currentFigure, boardRows);
-  placeFigureInBoard(currentFigure, boardRows);
-  popFullRows();
-  renderer.renderBoardAndCurrentFigure(boardRows, currentFigure);
+
+  if (isFigurePartiallyAboveBoard(currentFigure)) {
+    gameOver();
+  } else {
+    placeFigureInBoard(currentFigure, boardRows);
+    popFullRows();
+    renderer.renderBoardAndCurrentFigure(boardRows, currentFigure);
+  }
 }
 
 function initKeyEventListener() {
@@ -96,12 +101,16 @@ function tick() {
       y: currentFigure.y + 1,
     };
   } else if (isFigurePartiallyAboveBoard(currentFigure)) {
-    alert(`Game over, your score: ${score}`);
-    restartGame();
+    gameOver();
   } else {
     placeFigureInBoard(currentFigure, boardRows);
     popFullRows();
   }
+}
+
+function gameOver() {
+  alert(`Game over, your score: ${score}`);
+  restartGame();
 }
 
 function gameLoop() {
