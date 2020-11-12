@@ -134,7 +134,16 @@ function rotateFigure(figure, boardRows) {
   renderer.renderBoardAndCurrentFigure(boardRows, currentFigure);
 }
 
+function setPortraitModeIfPossible() {
+  try {
+    screen.orientation.lock('portrait');
+  } catch {
+
+  }
+}
+
 export function main() {
+  setPortraitModeIfPossible();
   setInterval(gameLoop, 500);
   initKeyEventListener();
   restartGame();
