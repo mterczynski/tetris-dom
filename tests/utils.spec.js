@@ -405,7 +405,7 @@ describe("utils", () => {
   })
 
   describe('getFigureCenter', () => {
-    test('should return position of figure\' center if it exists', () => {
+    test('should return position of figure\'s center if it exists', () => {
       // given
       const figure = {
         x: 2,
