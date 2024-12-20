@@ -1,94 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Tetris</title>
+    <style>
+      * {
+        color: white;
+        font-family: Calibri;
+        margin: 0;
+        padding: 0;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Tetris</title>
-  <style>
-    * {
-      color: white;
-      font-family: Calibri;
-      margin: 0;
-      padding: 0;
-    }
+      body {
+        background: rgb(20, 20, 20);
+        display: flex;
+        justify-content: center;
+        height: 100vh;
+      }
 
-    body {
-      background: rgb(20, 20, 20);
-    }
+      ul {
+        list-style-type: none;
+      }
 
-    ul {
-      list-style-type: none;
-    }
+      #game-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .controls {
-      margin-right: 20px;
-    }
+      #board {
+        background: black;
+        border-bottom: 1px solid rgb(0, 0, 0);
+        border-right: 1px solid rgb(0, 0, 0);
+        margin-bottom: 10px;
+      }
 
-    #game-container {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-    }
+      .row {
+        display: flex;
+      }
 
-    #board {
-      background: black;
-      border-bottom: 1px solid rgb(0, 0, 0);
-      border-right: 1px solid rgb(0, 0, 0);
-      margin-bottom: 10px;
-    }
+      .tile {
+        height: 30px;
+        width: 30px;
+        border-left: 1px solid rgb(0, 0, 0);
+        border-top: 1px solid rgb(0, 0, 0);
+      }
+      .score-row {
+        margin-top: 3rem;
+      }
+      article {
+        display: flex;
+        justify-content: space-between;
+      }
+      .arrow_up {
+        position: relative;
+        top: -13px;
+        cursor: pointer;
+      }
+      .main_main {
+        display: none;
+      }
+      .arrow-aside_1 {
+        position: relative;
+        top: -4rem;
+        right: 2.4rem;
+        cursor: pointer;
+      }
+      .arrow-aside_2 {
+        position: relative;
+        top: -6.6rem;
+        cursor: pointer;
+        left: 2.2rem;
+      }
+      .arrow_down {
+        position: relative;
+        top: 1rem;
+        cursor: pointer;
+      }
+      .icon_move {
+        margin-top: 10px;
+      }
 
-    .row {
-      display: flex;
-    }
+      @media screen and (max-width: 620px) {
+        #board {
+          margin: 1rem;
+        }
 
-    .tile {
-      height: 30px;
-      width: 30px;
-      border-left: 1px solid rgb(0, 0, 0);
-      border-top: 1px solid rgb(0, 0, 0);
-    }
-  </style>
-  <link rel="stylesheet" href="figures.css" />
-</head>
+        .score-row {
+          left: 1rem;
+          position: absolute;
+          bottom: 0rem;
+        }
+        .icon_move {
+        }
+        .controls {
+          display: none;
+        }
+        article {
+          display: flex;
+          justify-content: center;
+        }
+        .main_main {
+          display: block;
+        }
+      }
+      @media screen and (max-width: 850px) {
+        .icon_move {
+          display: block;
+        }
+        .main_main {
+          display: block;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="figures.css" />
+  </head>
 
-<body>
-  <div id="game-container">
-    <div class="controls">
-      <h3>Controls:</h3>
-      <ul>
-        <li>W - rotate</li>
-        <li>A - move left</li>
-        <li>S - place block</li>
-        <li>D - move right</li>
-      </ul>
-    </div>
-
-    <div>
-      <div id="board"></div>
-
-      <div class="score-row">
-        <div>
-          <span>Score:</span>
-          <span id="score">0</span>
+  <body>
+    <div id="game-container">
+      <div>
+        <div class="score-row">
+          <div>
+            <span>Score:</span>
+            <span id="score">0</span>
+          </div>
+          <div>
+            <span>Best score:</span>
+            <span id="best-score">0</span>
+          </div>
         </div>
-        <div>
-          <span>Best score:</span>
-          <span id="best-score">0</span>
-        </div>
+        <section class="center">
+          <div id="board"></div>
+        </section>
+
+        <article>
+          <div class="controls">
+            <h3>Controls:</h3>
+            <ul>
+              <li>W, &uarr; - move up</li>
+              <li>A, &larr; - move left</li>
+              <li>S, &darr; - move down</li>
+              <li>D, &rarr; - move right</li>
+            </ul>
+          </div>
+
+          <!-- arrow -->
+          <div class="main_main">
+            <div class="icon_move">
+              <div class="arrow_up">
+                <img
+                  src="./img/arrow_upward_36dp_5F6368_FILL0_wght400_GRAD0_opsz40.svg"
+                  alt=""
+                />
+              </div>
+              <div class="arrow_down">
+                <img
+                  src="./img/arrow_downward_36dp_5F6368_FILL0_wght400_GRAD0_opsz40.svg"
+                  alt=""
+                />
+              </div>
+              <main class="side">
+                <div class="arrow-aside_1">
+                  <img
+                    src="./img/arrow_back_36dp_5F6368_FILL0_wght400_GRAD0_opsz40.svg"
+                    alt=""
+                  />
+                </div>
+                <div class="arrow-aside_2">
+                  <img src="./img/side_right.svg" alt="" />
+                </div>
+              </main>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
-  </div>
 
+    <script type="module">
+      import { main } from "./js/main.js";
 
-  <script type="module">
-    import { main } from "./js/main.js";
-
-    main();
-  </script>
-</body>
-
+      main();
+    </script>
+  </body>
 </html>

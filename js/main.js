@@ -1,12 +1,21 @@
 import { figures } from "./figures.js";
 import { renderer } from "./renderer.js";
-import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBoardAfterPoppingRows, getFigureBlockPositions, getFullRows, getRotatedFigure, getSlammedFigure, isFigurePartiallyAboveBoard } from "./utils.js";
+import {
+  canFigureBeRotatedAsNewFigure,
+  canTranslateFigureByVector,
+  getBoardAfterPoppingRows,
+  getFigureBlockPositions,
+  getFullRows,
+  getRotatedFigure,
+  getSlammedFigure,
+  isFigurePartiallyAboveBoard,
+} from "./utils.js";
 
 const boardWidth = 10;
 const boardHeight = 15;
 
 let score = 0;
-let bestScore = localStorage.getItem('bestScore') || 0;
+let bestScore = localStorage.getItem("bestScore") || 0;
 
 let boardRows = getNewBoardRows();
 let currentFigure = getRandomFigure();
@@ -70,17 +79,35 @@ function slamCurrentFigure() {
 }
 
 function initKeyEventListener() {
-  document.addEventListener("keypress", ({ key }) => {
-    // todo - add arrow support
-    if (["ArrowLeft", "a", "A"].includes(key)) {
+  document.addEventListener("keydown", (event) => {
+    console.log(`Key pressed: ${event.key}`); // Debugging to check which key is detected
+
+    if (["ArrowLeft", "a", "A"].includes(event.key)) {
       moveCurrentFigureByVectorIfPossible({ x: -1, y: 0 }, boardRows);
-    } else if (["ArrowRight", "d", "D"].includes(key)) {
+    } else if (["ArrowRight", "d", "D"].includes(event.key)) {
       moveCurrentFigureByVectorIfPossible({ x: 1, y: 0 }, boardRows);
-    } else if (["ArrowDown", "s", "S"].includes(key)) {
+    } else if (["ArrowDown", "s", "S"].includes(event.key)) {
       slamCurrentFigure();
-    } else if (["ArrowUp", "w", "W"].includes(key)) {
+    } else if (["ArrowUp", "w", "W"].includes(event.key)) {
       rotateFigure(currentFigure, boardRows);
     }
+  });
+
+  // Button Event Listeners
+  document.querySelector(".arrow_up")?.addEventListener("click", () => {
+    rotateFigure(currentFigure, boardRows);
+  });
+
+  document.querySelector(".arrow_down")?.addEventListener("click", () => {
+    slamCurrentFigure();
+  });
+
+  document.querySelector(".arrow-aside_1")?.addEventListener("click", () => {
+    moveCurrentFigureByVectorIfPossible({ x: -1, y: 0 }, boardRows);
+  });
+
+  document.querySelector(".arrow-aside_2")?.addEventListener("click", () => {
+    moveCurrentFigureByVectorIfPossible({ x: 1, y: 0 }, boardRows);
   });
 }
 
@@ -89,7 +116,7 @@ function popFullRows() {
   boardRows = getBoardAfterPoppingRows(fullRows, boardRows);
   score += fullRows.length;
   bestScore = Math.max(bestScore, score);
-  localStorage.setItem('bestScore', bestScore);
+  localStorage.setItem("bestScore", bestScore);
   renderer.renderScore(score);
   renderer.renderBestScore(bestScore);
 }
@@ -136,10 +163,8 @@ function rotateFigure(figure, boardRows) {
 
 function setPortraitModeIfPossible() {
   try {
-    screen.orientation.lock('portrait');
-  } catch {
-
-  }
+    screen.orientation.lock("portrait");
+  } catch {}
 }
 
 export function main() {
