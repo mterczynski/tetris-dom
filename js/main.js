@@ -78,18 +78,32 @@ function slamCurrentFigure() {
   }
 }
 
+function onLeftKeyPressed() {
+  moveCurrentFigureByVectorIfPossible({ x: -1, y: 0 }, boardRows);
+}
+
+function onRightKeyPressed() {
+  moveCurrentFigureByVectorIfPossible({ x: 1, y: 0 }, boardRows);
+}
+
+function onDownKeyPressed() {
+  slamCurrentFigure();
+}
+
+function onUpKeyPressed() {
+  rotateFigure(currentFigure, boardRows);
+}
+
 function initKeyEventListener() {
   document.addEventListener("keydown", (event) => {
-    console.log(`Key pressed: ${event.key}`); // Debugging to check which key is detected
-
     if (["ArrowLeft", "a", "A"].includes(event.key)) {
-      moveCurrentFigureByVectorIfPossible({ x: -1, y: 0 }, boardRows);
+      onLeftKeyPressed();
     } else if (["ArrowRight", "d", "D"].includes(event.key)) {
-      moveCurrentFigureByVectorIfPossible({ x: 1, y: 0 }, boardRows);
+      onRightKeyPressed();
     } else if (["ArrowDown", "s", "S"].includes(event.key)) {
-      slamCurrentFigure();
+      onDownKeyPressed();
     } else if (["ArrowUp", "w", "W"].includes(event.key)) {
-      rotateFigure(currentFigure, boardRows);
+      onUpKeyPressed()
     }
   });
 
@@ -108,6 +122,61 @@ function initKeyEventListener() {
 
   document.querySelector(".arrow-aside_2")?.addEventListener("click", () => {
     moveCurrentFigureByVectorIfPossible({ x: 1, y: 0 }, boardRows);
+  });
+}
+
+function addGamePadControls() {
+  window.addEventListener("gamepadconnected", (e) => {
+    const index = e.gamepad.index;
+    const lastPressTimestamps = {
+      12: 0,
+      13: 0,
+      14: 0,
+      15: 0
+    };
+    const lastReleaseTimestamps = {
+      12: 0,
+      13: 0,
+      14: 0,
+      15: 0
+    };
+    const cooldownDuration = 200; // ms after release before next press
+    const buttonStates = {
+      12: false,
+      13: false,
+      14: false,
+      15: false
+    };
+
+    function loop() {
+      const gp = navigator.getGamepads()[index];
+      if (!gp) return requestAnimationFrame(loop);
+
+      const currentTime = Date.now();
+      [12, 13, 14, 15].forEach(btn => {
+        const isPressed = gp.buttons[btn].pressed;
+        if (isPressed && !buttonStates[btn]) {
+          // Button was just pressed
+          if (currentTime - lastReleaseTimestamps[btn] >= cooldownDuration) {
+            switch(btn) {
+              case 12: onUpKeyPressed(); break;
+              case 13: onDownKeyPressed(); break;
+              case 14: onLeftKeyPressed(); break;
+              case 15: onRightKeyPressed(); break;
+            }
+            lastPressTimestamps[btn] = currentTime;
+          }
+        } else if (!isPressed && buttonStates[btn]) {
+          // Button was just released
+          lastReleaseTimestamps[btn] = currentTime;
+        }
+        buttonStates[btn] = isPressed;
+      });
+
+      requestAnimationFrame(loop);
+    }
+
+    loop();
   });
 }
 
@@ -171,5 +240,6 @@ export function main() {
   setPortraitModeIfPossible();
   setInterval(gameLoop, 500);
   initKeyEventListener();
+  addGamePadControls();
   restartGame();
 }
