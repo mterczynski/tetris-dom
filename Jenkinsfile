@@ -1,3 +1,5 @@
+// deprecated; todo - replace with deploy.sh file
+
 pipeline {
 	agent any
 
