@@ -11,8 +11,8 @@ import {
   isFigurePartiallyAboveBoard,
 } from "./utils.js";
 
-const boardWidth = 10;
-const boardHeight = 15;
+const boardWidth = 30;
+const boardHeight = 30;
 
 let score = 0;
 let bestScore = localStorage.getItem("bestScore") || 0;
