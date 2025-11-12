@@ -1,27 +1,47 @@
-.figure-pyramid {
-  background: hsl(185, 100%, 50%);
-}
-
-.figure-square {
-  background: hsl(123, 100%, 50%);
-}
-
-.figure-line {
-  background: hsl(54, 100%, 50%);
-}
-
-.figure-s {
-  background: hsl(229, 100%, 50%)
-}
-
-.figure-z {
+.figure-f {
   background: hsl(0, 100%, 50%);
 }
 
-.figure-j {
-  background: hsl(278, 100%, 50%)
+.figure-i {
+  background: hsl(30, 100%, 50%);
 }
 
 .figure-l {
-  background: hsl(27, 100%, 50%);
+  background: hsl(60, 100%, 50%);
+}
+
+.figure-n {
+  background: hsl(90, 100%, 50%);
+}
+
+.figure-p {
+  background: hsl(120, 100%, 50%);
+}
+
+.figure-t {
+  background: hsl(150, 100%, 50%);
+}
+
+.figure-u {
+  background: hsl(180, 100%, 50%);
+}
+
+.figure-v {
+  background: hsl(210, 100%, 50%);
+}
+
+.figure-w {
+  background: hsl(240, 100%, 50%);
+}
+
+.figure-x {
+  background: hsl(270, 100%, 50%);
+}
+
+.figure-y {
+  background: hsl(300, 100%, 50%);
+}
+
+.figure-z {
+  background: hsl(330, 100%, 50%);
 }
