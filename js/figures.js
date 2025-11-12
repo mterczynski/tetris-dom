@@ -4,6 +4,7 @@ export const figures = Object.freeze([
     shape: [
       [0, 1, 0],
       [1, 2, 1],
+      [0, 1, 0],
     ],
     rotable: true,
   },
@@ -14,6 +15,7 @@ export const figures = Object.freeze([
       [1],
       [2],
       [1],
+      [1],
     ],
     rotable: true,
   },
@@ -22,12 +24,14 @@ export const figures = Object.freeze([
     shape: [
       [1, 1, 0],
       [0, 2, 1],
+      [0, 1, 0],
     ],
     rotable: true,
   },
   {
     className: 'figure-s',
     shape: [
+      [0, 1, 0],
       [0, 2, 1],
       [1, 1, 0],
     ],
@@ -38,6 +42,7 @@ export const figures = Object.freeze([
     shape: [
       [1, 1],
       [1, 1],
+      [1, 0],
     ],
     rotable: false,
   },
@@ -47,6 +52,7 @@ export const figures = Object.freeze([
       [0, 1],
       [0, 1],
       [1, 2],
+      [1, 0],
     ],
     rotable: true,
   },
@@ -56,6 +62,7 @@ export const figures = Object.freeze([
       [1, 0],
       [1, 0],
       [2, 1],
+      [0, 1],
     ],
     rotable: true,
   },
