@@ -1,27 +1,34 @@
 .figure-pyramid {
-  background: hsl(185, 100%, 50%);
+  background: linear-gradient(135deg, hsl(185, 100%, 60%) 0%, hsl(185, 100%, 50%) 50%, hsl(185, 100%, 35%) 100%);
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .figure-square {
-  background: hsl(123, 100%, 50%);
+  background: linear-gradient(135deg, hsl(123, 100%, 60%) 0%, hsl(123, 100%, 50%) 50%, hsl(123, 100%, 35%) 100%);
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .figure-line {
-  background: hsl(54, 100%, 50%);
+  background: linear-gradient(135deg, hsl(54, 100%, 60%) 0%, hsl(54, 100%, 50%) 50%, hsl(54, 100%, 35%) 100%);
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .figure-s {
-  background: hsl(229, 100%, 50%)
+  background: linear-gradient(135deg, hsl(229, 100%, 60%) 0%, hsl(229, 100%, 50%) 50%, hsl(229, 100%, 35%) 100%);
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .figure-z {
-  background: hsl(0, 100%, 50%);
+  background: linear-gradient(135deg, hsl(0, 100%, 60%) 0%, hsl(0, 100%, 50%) 50%, hsl(0, 100%, 35%) 100%);
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .figure-j {
-  background: hsl(278, 100%, 50%)
+  background: linear-gradient(135deg, hsl(278, 100%, 60%) 0%, hsl(278, 100%, 50%) 50%, hsl(278, 100%, 35%) 100%);
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .figure-l {
-  background: hsl(27, 100%, 50%);
+  background: linear-gradient(135deg, hsl(27, 100%, 60%) 0%, hsl(27, 100%, 50%) 50%, hsl(27, 100%, 35%) 100%);
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4), inset -2px -2px 4px rgba(0, 0, 0, 0.4);
 }
