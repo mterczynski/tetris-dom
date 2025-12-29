@@ -88,6 +88,18 @@ export function isFigurePartiallyAboveBoard(figure) {
   return figure.y < 0;
 }
 
+export function doesFigureOverlapWithBoard(figure, boardRows) {
+  const figureBlockPositions = getFigureBlockPositions(figure);
+  const figureBlockPositionsInsideBoard = getFigureBlockPositionsInsideBoard(figureBlockPositions, boardRows.length);
+  const boardBlockPositions = getBlockPositionsFromBoardRows(boardRows);
+
+  return figureBlockPositionsInsideBoard.some(figureBlock =>
+    boardBlockPositions.some(boardBlock =>
+      figureBlock.x === boardBlock.x && figureBlock.y === boardBlock.y
+    )
+  );
+}
+
 export function getFigureCenter(figure) {
   if (!figure.rotable) {
     return null;
