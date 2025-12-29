@@ -4,6 +4,7 @@ import { settings } from "./settings.js";
 import {
   canFigureBeRotatedAsNewFigure,
   canTranslateFigureByVector,
+  doesFigureOverlapWithBoard,
   getBoardAfterPoppingRows,
   getFigureBlockPositions,
   getFullRows,
@@ -64,6 +65,13 @@ function placeFigureInBoard(figure, boardRows) {
   });
 
   currentFigure = getRandomFigure();
+  
+  // Check if the new figure collides with already-placed blocks
+  if (doesFigureOverlapWithBoard(currentFigure, boardRows)) {
+    gameOver();
+    return;
+  }
+  
   renderer.renderBoardAndCurrentFigure(boardRows, currentFigure);
 }
 
