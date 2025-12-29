@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "test:cov": "jest --coverage",
-    "start": "http-server -p 3000"
+    "start": "http-server -p 3000",
+    "thumbnail": "node generate-thumbnail.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "http-server": "0.9.0",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "playwright": "^1.57.0"
   }
 }
