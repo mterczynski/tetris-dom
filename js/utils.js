@@ -91,12 +91,14 @@ export function isFigurePartiallyAboveBoard(figure) {
 export function doesFigureOverlapWithBoard(figure, boardRows) {
   const figureBlockPositions = getFigureBlockPositions(figure);
   const figureBlockPositionsInsideBoard = getFigureBlockPositionsInsideBoard(figureBlockPositions, boardRows.length);
-  const boardBlockPositions = getBlockPositionsFromBoardRows(boardRows);
+  
+  // Create a Set of board block positions for O(1) lookup
+  const boardBlockPositionsSet = new Set(
+    getBlockPositionsFromBoardRows(boardRows).map(pos => `${pos.x},${pos.y}`)
+  );
 
   return figureBlockPositionsInsideBoard.some(figureBlock =>
-    boardBlockPositions.some(boardBlock =>
-      figureBlock.x === boardBlock.x && figureBlock.y === boardBlock.y
-    )
+    boardBlockPositionsSet.has(`${figureBlock.x},${figureBlock.y}`)
   );
 }
 
