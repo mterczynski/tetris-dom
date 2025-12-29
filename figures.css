@@ -75,12 +75,47 @@
     inset -2px -2px 4px rgba(0, 0, 0, 0.4);
 }
 
-/* Glow effect for blocks in first row */
-/* .row:last-child .tile[class*="figure-"] {
+/* Dynamic glow effects for exposed borders */
+.glow-top {
+  border-top: 2px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.glow-bottom {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.glow-left {
+  border-left: 2px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.glow-right {
+  border-right: 2px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Add glow shadow effects */
+.tile[class*="glow-"] {
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.4), 0 0 5px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Brighter glow for falling figure */
+.falling-figure.glow-top {
   border-top: 2px solid rgba(255, 255, 255, 0.8) !important;
-  box-shadow:
-    inset 2px 2px 4px rgba(255, 255, 255, 0.4),
-    inset -2px -2px 4px rgba(0, 0, 0, 0.4),
-    0 -3px 6px rgba(255, 255, 255, 0.5),
-    inset 0 2px 3px rgba(255, 255, 255, 0.3) !important;
-} */
+}
+
+.falling-figure.glow-bottom {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+.falling-figure.glow-left {
+  border-left: 2px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+.falling-figure.glow-right {
+  border-right: 2px solid rgba(255, 255, 255, 0.8) !important;
+}
+
+.falling-figure[class*="glow-"] {
+  box-shadow: inset 2px 2px 4px rgba(255, 255, 255, 0.4),
+    inset -2px -2px 4px rgba(0, 0, 0, 0.4), 0 0 8px rgba(255, 255, 255, 0.5) !important;
+}

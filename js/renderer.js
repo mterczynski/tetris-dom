@@ -1,10 +1,11 @@
 import { getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getHtmlTile } from "./utils.js";
+import { calculateGlowPositions } from "./glowCalculator.js";
 
 function clearBoard() {
   [...document.querySelectorAll('.tile')].forEach(tile =>
     tile.className = tile.className
       .split(' ')
-      .filter(className => !className.startsWith('figure'))
+      .filter(className => !className.startsWith('figure') && !className.startsWith('glow-') && className !== 'falling-figure')
       .join(' ')
   )
 }
@@ -23,7 +24,9 @@ function drawCurrentFigure(currentFigure, boardHeight) {
   const figureBlockPositions = getFigureBlockPositions(currentFigure);
 
   getFigureBlockPositionsInsideBoard(figureBlockPositions, boardHeight).forEach(block => {
-    getHtmlTile(block).classList.add(currentFigure.className);
+    const tile = getHtmlTile(block);
+    tile.classList.add(currentFigure.className);
+    tile.classList.add('falling-figure');
   });
 }
 
@@ -32,6 +35,16 @@ export const renderer = {
     clearBoard();
     drawBlocks(boardRows);
     drawCurrentFigure(currentFigure, boardRows.length);
+
+    // Apply glow effects
+    const glowMap = calculateGlowPositions(boardRows, currentFigure, boardRows.length);
+    glowMap.forEach((glowDirections, posKey) => {
+      const [x, y] = posKey.split(',').map(Number);
+      const tile = getHtmlTile({ x, y });
+      glowDirections.forEach(direction => {
+        tile.classList.add(`glow-${direction}`);
+      });
+    });
   },
 
   recreateBoardHtmlElement({ width, height }) {
