@@ -1,5 +1,6 @@
 import { figures } from "./figures.js";
 import { renderer } from "./renderer.js";
+import { settings } from "./settings.js";
 import {
   canFigureBeRotatedAsNewFigure,
   canTranslateFigureByVector,
@@ -172,4 +173,16 @@ export function main() {
   setInterval(gameLoop, 500);
   initKeyEventListener();
   restartGame();
+  
+  // Hide controls if showControls is false
+  if (!settings.showControls) {
+    const controls = document.querySelector('.controls');
+    if (controls) {
+      controls.style.display = 'none';
+    }
+    const mainMain = document.querySelector('.main_main');
+    if (mainMain) {
+      mainMain.style.display = 'none';
+    }
+  }
 }

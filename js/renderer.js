@@ -1,5 +1,6 @@
 import { getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getHtmlTile } from "./utils.js";
 import { calculateGlowPositions } from "./glowCalculator.js";
+import { settings } from "./settings.js";
 
 function clearBoard() {
   [...document.querySelectorAll('.tile')].forEach(tile =>
@@ -36,15 +37,17 @@ export const renderer = {
     drawBlocks(boardRows);
     drawCurrentFigure(currentFigure, boardRows.length);
 
-    // Apply glow effects
-    const glowMap = calculateGlowPositions(boardRows, currentFigure, boardRows.length);
-    glowMap.forEach((glowDirections, posKey) => {
-      const [x, y] = posKey.split(',').map(Number);
-      const tile = getHtmlTile({ x, y });
-      glowDirections.forEach(direction => {
-        tile.classList.add(`glow-${direction}`);
+    // Apply glow effects if enabled
+    if (settings.glowEnabled) {
+      const glowMap = calculateGlowPositions(boardRows, currentFigure, boardRows.length);
+      glowMap.forEach((glowDirections, posKey) => {
+        const [x, y] = posKey.split(',').map(Number);
+        const tile = getHtmlTile({ x, y });
+        glowDirections.forEach(direction => {
+          tile.classList.add(`glow-${direction}`);
+        });
       });
-    });
+    }
   },
 
   recreateBoardHtmlElement({ width, height }) {
