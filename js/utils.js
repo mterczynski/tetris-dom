@@ -88,6 +88,13 @@ export function isFigurePartiallyAboveBoard(figure) {
   return figure.y < 0;
 }
 
+/**
+ * Checks if a figure overlaps with any blocks already placed on the board.
+ * Only considers blocks of the figure that are inside the board (y >= 0).
+ * @param {Object} figure - The figure to check for overlap
+ * @param {Array<Array<string>>} boardRows - The game board with placed blocks
+ * @returns {boolean} True if the figure overlaps with any placed blocks, false otherwise
+ */
 export function doesFigureOverlapWithBoard(figure, boardRows) {
   const figureBlockPositions = getFigureBlockPositions(figure);
   const figureBlockPositionsInsideBoard = getFigureBlockPositionsInsideBoard(figureBlockPositions, boardRows.length);
