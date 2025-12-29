@@ -94,32 +94,102 @@
         font-size: 0.95rem;
       }
       .arrow_up {
-        position: relative;
-        top: -13px;
         cursor: pointer;
+        background: rgba(0, 212, 255, 0.2);
+        padding: 1rem;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 212, 255, 0.5);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .arrow_up img {
+        width: 48px;
+        height: 48px;
+        filter: brightness(0) invert(1)
+          drop-shadow(0 0 5px rgba(0, 212, 255, 0.8));
       }
       .main_main {
+        background: rgba(10, 10, 30, 0.95);
+        padding: 2rem;
+        border-radius: 20px;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(0, 212, 255, 0.4);
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.3),
+          0 4px 20px rgba(0, 0, 0, 0.8);
         display: none;
       }
       .arrow-aside_1 {
-        position: relative;
-        top: -4rem;
-        right: 2.4rem;
         cursor: pointer;
+        background: rgba(0, 212, 255, 0.2);
+        padding: 1rem;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 212, 255, 0.5);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .arrow-aside_1 img {
+        width: 48px;
+        height: 48px;
+        filter: brightness(0) invert(1)
+          drop-shadow(0 0 5px rgba(0, 212, 255, 0.8));
       }
       .arrow-aside_2 {
-        position: relative;
-        top: -6.6rem;
         cursor: pointer;
-        left: 2.2rem;
+        background: rgba(0, 212, 255, 0.2);
+        padding: 1rem;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 212, 255, 0.5);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .arrow-aside_2 img {
+        width: 48px;
+        height: 48px;
+        filter: brightness(0) invert(1)
+          drop-shadow(0 0 5px rgba(0, 212, 255, 0.8));
       }
       .arrow_down {
-        position: relative;
-        top: 1rem;
         cursor: pointer;
+        background: rgba(0, 212, 255, 0.2);
+        padding: 1rem;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 212, 255, 0.5);
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .arrow_down img {
+        width: 48px;
+        height: 48px;
+        filter: brightness(0) invert(1)
+          drop-shadow(0 0 5px rgba(0, 212, 255, 0.8));
       }
       .icon_move {
-        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        width: 200px;
+      }
+      .arrow_row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+      .side {
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
       }
 
       @media screen and (max-width: 620px) {
@@ -128,9 +198,9 @@
         }
 
         .score-row {
-          left: 1rem;
-          position: absolute;
-          bottom: 0rem;
+          position: static;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
         }
         .icon_move {
         }
@@ -188,17 +258,13 @@
           <!-- arrow -->
           <div class="main_main">
             <div class="icon_move">
-              <div class="arrow_up">
-                <img
-                  src="./img/arrow_upward_36dp_5F6368_FILL0_wght400_GRAD0_opsz40.svg"
-                  alt=""
-                />
-              </div>
-              <div class="arrow_down">
-                <img
-                  src="./img/arrow_downward_36dp_5F6368_FILL0_wght400_GRAD0_opsz40.svg"
-                  alt=""
-                />
+              <div class="arrow_row">
+                <div class="arrow_up">
+                  <img
+                    src="./img/arrow_upward_36dp_5F6368_FILL0_wght400_GRAD0_opsz40.svg"
+                    alt=""
+                  />
+                </div>
               </div>
               <main class="side">
                 <div class="arrow-aside_1">
@@ -211,6 +277,14 @@
                   <img src="./img/side_right.svg" alt="" />
                 </div>
               </main>
+              <div class="arrow_row">
+                <div class="arrow_down">
+                  <img
+                    src="./img/arrow_downward_36dp_5F6368_FILL0_wght400_GRAD0_opsz40.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </article>
