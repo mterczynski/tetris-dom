@@ -12,5 +12,5 @@ export const settings = {
    * Show or hide controls UI
    * When true, displays keyboard controls and on-screen arrow buttons
    */
-  showControls: false,
+  showControls: true,
 };
