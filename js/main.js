@@ -95,21 +95,33 @@ function initKeyEventListener() {
   });
 
   // Button Event Listeners
-  document.querySelector(".arrow_up")?.addEventListener("click", () => {
-    rotateFigure(currentFigure, boardRows);
-  });
+  const arrowUp = document.querySelector(".arrow_up");
+  if (arrowUp) {
+    arrowUp.addEventListener("click", () => {
+      rotateFigure(currentFigure, boardRows);
+    });
+  }
 
-  document.querySelector(".arrow_down")?.addEventListener("click", () => {
-    slamCurrentFigure();
-  });
+  const arrowDown = document.querySelector(".arrow_down");
+  if (arrowDown) {
+    arrowDown.addEventListener("click", () => {
+      slamCurrentFigure();
+    });
+  }
 
-  document.querySelector(".arrow-aside_1")?.addEventListener("click", () => {
-    moveCurrentFigureByVectorIfPossible({ x: -1, y: 0 }, boardRows);
-  });
+  const arrowLeft = document.querySelector(".arrow-aside_1");
+  if (arrowLeft) {
+    arrowLeft.addEventListener("click", () => {
+      moveCurrentFigureByVectorIfPossible({ x: -1, y: 0 }, boardRows);
+    });
+  }
 
-  document.querySelector(".arrow-aside_2")?.addEventListener("click", () => {
-    moveCurrentFigureByVectorIfPossible({ x: 1, y: 0 }, boardRows);
-  });
+  const arrowRight = document.querySelector(".arrow-aside_2");
+  if (arrowRight) {
+    arrowRight.addEventListener("click", () => {
+      moveCurrentFigureByVectorIfPossible({ x: 1, y: 0 }, boardRows);
+    });
+  }
 }
 
 function popFullRows() {
