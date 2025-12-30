@@ -27,7 +27,6 @@ function drawCurrentFigure(currentFigure, boardHeight) {
   getFigureBlockPositionsInsideBoard(figureBlockPositions, boardHeight).forEach(block => {
     const tile = getHtmlTile(block);
     tile.classList.add(currentFigure.className);
-    tile.classList.add('falling-figure');
   });
 }
 
