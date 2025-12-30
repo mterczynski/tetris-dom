@@ -63,25 +63,25 @@ export function calculateGlowPositions(boardRows, currentFigure, boardHeight) {
 
     // Check top - empty if no figure block above and no board block above
     const topKey = `${x},${y - 1}`;
-    if ((y === 0 || (!figurePositions.has(topKey) && (y - 1 < 0 || !boardRows[y - 1]?.[x])))) {
+    if ((y === 0 || (!figurePositions.has(topKey) && (y - 1 < 0 || !boardRows[y - 1][x])))) {
       glows.push('top');
     }
 
     // Check bottom
     const bottomKey = `${x},${y + 1}`;
-    if (y === boardHeight - 1 || (!figurePositions.has(bottomKey) && (y + 1 >= boardHeight || !boardRows[y + 1]?.[x]))) {
+    if (y === boardHeight - 1 || (!figurePositions.has(bottomKey) && (y + 1 >= boardHeight || !boardRows[y + 1][x]))) {
       glows.push('bottom');
     }
 
     // Check left
     const leftKey = `${x - 1},${y}`;
-    if (x === 0 || (!figurePositions.has(leftKey) && (x - 1 < 0 || !boardRows[y]?.[x - 1]))) {
+    if (x === 0 || (!figurePositions.has(leftKey) && (x - 1 < 0 || !boardRows[y][x - 1]))) {
       glows.push('left');
     }
 
     // Check right
     const rightKey = `${x + 1},${y}`;
-    if (x === boardWidth - 1 || (!figurePositions.has(rightKey) && (x + 1 >= boardWidth || !boardRows[y]?.[x + 1]))) {
+    if (x === boardWidth - 1 || (!figurePositions.has(rightKey) && (x + 1 >= boardWidth || !boardRows[y][x + 1]))) {
       glows.push('right');
     }
 

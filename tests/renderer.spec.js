@@ -1,7 +1,10 @@
 import { renderer } from "../js/renderer";
+import { settings } from "../js/settings";
 
 beforeEach(() => {
   document.body.innerHTML = "";
+  // Disable glow effects for cleaner test expectations
+  settings.glowEnabled = false;
 });
 
 describe("renderer", () => {
