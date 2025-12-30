@@ -16,7 +16,7 @@ const boardWidth = 10;
 const boardHeight = 15;
 
 let score = 0;
-let bestScore = localStorage.getItem("bestScore") || 0;
+let bestScore = localStorage.getItem("tetris_bestScore") || 0;
 
 let boardRows = getNewBoardRows();
 let currentFigure = getRandomFigure();
@@ -117,7 +117,7 @@ function popFullRows() {
   boardRows = getBoardAfterPoppingRows(fullRows, boardRows);
   score += fullRows.length;
   bestScore = Math.max(bestScore, score);
-  localStorage.setItem("bestScore", bestScore);
+  localStorage.setItem("tetris_bestScore", bestScore);
   renderer.renderScore(score);
   renderer.renderBestScore(bestScore);
 }
