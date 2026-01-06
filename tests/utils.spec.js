@@ -1,4 +1,4 @@
-import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFigureFromTypedBlockPositions, getFigureWithEmptyShape, getFullRows, getHtmlTile, getRotatedBlockPositions, getRotatedFigure, getSlammedFigure, getTypedBlockPositions, isFigurePartiallyAboveBoard } from "../js/utils";
+import { canFigureBeRotatedAsNewFigure, canTranslateFigureByVector, doesFigureOverlapWithBoard, getBlockPositionsFromBoardRows, getBoardAfterPoppingRows, getFigureBlockPositions, getFigureBlockPositionsInsideBoard, getFigureCenter, getFigureFromTypedBlockPositions, getFigureWithEmptyShape, getFullRows, getHtmlTile, getRotatedBlockPositions, getRotatedFigure, getSlammedFigure, getTypedBlockPositions, isFigurePartiallyAboveBoard } from "../js/utils";
 
 describe("utils", () => {
   describe(".getFigureBlockPositions", () => {
@@ -398,6 +398,80 @@ describe("utils", () => {
 
       // when
       const result = isFigurePartiallyAboveBoard(figure);
+
+      // then
+      expect(result).toBe(false);
+    })
+  })
+
+  describe('doesFigureOverlapWithBoard', () => {
+    test('should return true if figure overlaps with placed blocks on the board', () => {
+      // given
+      const boardRows = [
+        ['', 'x', '', ''],
+        ['', 'x', '', ''],
+        ['x', 'x', '', ''],
+      ];
+
+      const figure = {
+        x: 0,
+        y: -1,
+        shape: [
+          [0, 1, 0],
+          [1, 1, 1]
+        ]
+      };
+
+      // when
+      const result = doesFigureOverlapWithBoard(figure, boardRows);
+
+      // then
+      expect(result).toBe(true); // Figure block at (1, 0) overlaps with board block at (1, 0)
+    })
+
+    test('should return false if figure does not overlap with placed blocks', () => {
+      // given
+      const boardRows = [
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['x', 'x', '', ''],
+      ];
+
+      const figure = {
+        x: 0,
+        y: -1,
+        shape: [
+          [0, 1, 0],
+          [1, 1, 1]
+        ]
+      };
+
+      // when
+      const result = doesFigureOverlapWithBoard(figure, boardRows);
+
+      // then
+      expect(result).toBe(false);
+    })
+
+    test('should return false if figure is fully above board and does not overlap', () => {
+      // given
+      const boardRows = [
+        ['', '', '', ''],
+        ['', '', '', ''],
+        ['x', 'x', '', ''],
+      ];
+
+      const figure = {
+        x: 0,
+        y: -3,
+        shape: [
+          [0, 1, 0],
+          [1, 1, 1]
+        ]
+      };
+
+      // when
+      const result = doesFigureOverlapWithBoard(figure, boardRows);
 
       // then
       expect(result).toBe(false);
