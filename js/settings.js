@@ -3,6 +3,12 @@
  */
 export const settings = {
   /**
+   * Number of blocks used to build each generated figure.
+   * Set to values above 2 to switch between triominoes, tetrominoes, pentominoes, etc.
+   */
+  blockSize: 4,
+
+  /**
    * Enable or disable glow effect on blocks
    * When enabled, blocks with exposed borders will have a white glow effect
    */
